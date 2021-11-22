@@ -1266,18 +1266,18 @@ internal class PmxBuilder
       Transform[] bones)
     {
         PmxVertex.BoneWeight[] boneWeightArray = new PmxVertex.BoneWeight[4];
-        if (((BoneWeight)ref unityWeight).boneIndex0 >= 0 && ((BoneWeight)ref unityWeight).boneIndex0 < bones.Length)
-            boneWeightArray[0].Bone = this.sbi((bones[((BoneWeight)ref unityWeight).boneIndex0]).name);
-        boneWeightArray[0].Value = ((BoneWeight)ref unityWeight).weight0;
-        if (((BoneWeight)ref unityWeight).boneIndex1 >= 0 && ((BoneWeight)ref unityWeight).boneIndex0 < bones.Length)
-            boneWeightArray[1].Bone = this.sbi((bones[((BoneWeight)ref unityWeight).boneIndex1]).name);
-        boneWeightArray[1].Value = ((BoneWeight)ref unityWeight).weight1;
-        if (((BoneWeight)ref unityWeight).boneIndex2 >= 0 && ((BoneWeight)ref unityWeight).boneIndex0 < bones.Length)
-            boneWeightArray[2].Bone = this.sbi((bones[((BoneWeight)ref unityWeight).boneIndex2]).name);
-        boneWeightArray[2].Value = ((BoneWeight)ref unityWeight).weight2;
-        if (((BoneWeight)ref unityWeight).boneIndex3 >= 0 && ((BoneWeight)ref unityWeight).boneIndex0 < bones.Length)
-            boneWeightArray[3].Bone = this.sbi((bones[((BoneWeight)ref unityWeight).boneIndex3]).name);
-        boneWeightArray[3].Value = ((BoneWeight)ref unityWeight).weight3;
+        if (((BoneWeight) unityWeight).boneIndex0 >= 0 && ((BoneWeight) unityWeight).boneIndex0 < bones.Length)
+            boneWeightArray[0].Bone = this.sbi((bones[((BoneWeight) unityWeight).boneIndex0]).name);
+        boneWeightArray[0].Value = ((BoneWeight) unityWeight).weight0;
+        if (((BoneWeight) unityWeight).boneIndex1 >= 0 && ((BoneWeight) unityWeight).boneIndex0 < bones.Length)
+            boneWeightArray[1].Bone = this.sbi((bones[((BoneWeight) unityWeight).boneIndex1]).name);
+        boneWeightArray[1].Value = ((BoneWeight) unityWeight).weight1;
+        if (((BoneWeight) unityWeight).boneIndex2 >= 0 && ((BoneWeight) unityWeight).boneIndex0 < bones.Length)
+            boneWeightArray[2].Bone = this.sbi((bones[((BoneWeight) unityWeight).boneIndex2]).name);
+        boneWeightArray[2].Value = ((BoneWeight) unityWeight).weight2;
+        if (((BoneWeight) unityWeight).boneIndex3 >= 0 && ((BoneWeight) unityWeight).boneIndex0 < bones.Length)
+            boneWeightArray[3].Bone = this.sbi((bones[((BoneWeight) unityWeight).boneIndex3]).name);
+        boneWeightArray[3].Value = ((BoneWeight) unityWeight).weight3;
         return boneWeightArray;
     }
 
@@ -1344,9 +1344,9 @@ internal class PmxBuilder
             Matrix4x4 matrix4x4_1 = new Matrix4x4();
             Matrix4x4 bindpose = this.bindposeList[index];
             Matrix4x4 worldToLocalMatrix = this.boneList[index1].worldToLocalMatrix;
-            Matrix4x4 inverse = ((Matrix4x4)ref worldToLocalMatrix).inverse;
-            Matrix4x4 matrix4x4_2 = Matrix4x4.op_Multiply(bindpose, inverse);
-            v = ((Matrix4x4)ref matrix4x4_2).MultiplyVector(v);
+            Matrix4x4 inverse = worldToLocalMatrix.inverse;
+            Matrix4x4 matrix4x4_2 = bindpose * inverse;
+            v = matrix4x4_2.MultiplyVector(v);
             v = this.TransToParent(v, index1);
         }
         return v;
@@ -1354,7 +1354,7 @@ internal class PmxBuilder
 
     private UnityEngine.Vector3 CalcPostion(UnityEngine.Vector3 v, BoneWeight boneWeight, Transform[] bones)
     {
-        Transform bone = bones[((BoneWeight)ref boneWeight).boneIndex0];
+        Transform bone = bones[boneWeight.boneIndex0];
         if (this.bonesMap.ContainsKey(bone))
         {
             int bones1 = this.bonesMap[bone];
