@@ -46,11 +46,11 @@ namespace PmxLib
     {
       this.FrameIndex = BitConverter.ToInt32(bytes, startIndex);
       int startIndex1 = startIndex + 4;
-      this.Color.r = (__Null) (double) BitConverter.ToSingle(bytes, startIndex1);
+      this.Color.r = BitConverter.ToSingle(bytes, startIndex1);
       int startIndex2 = startIndex1 + 4;
-      this.Color.g = (__Null) (double) BitConverter.ToSingle(bytes, startIndex2);
+      this.Color.g = BitConverter.ToSingle(bytes, startIndex2);
       int startIndex3 = startIndex2 + 4;
-      this.Color.b = (__Null) (double) BitConverter.ToSingle(bytes, startIndex3);
+      this.Color.b = BitConverter.ToSingle(bytes, startIndex3);
       int startIndex4 = startIndex3 + 4;
       this.Direction.x = BitConverter.ToSingle(bytes, startIndex4);
       int startIndex5 = startIndex4 + 4;

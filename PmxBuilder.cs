@@ -1341,7 +1341,6 @@ internal class PmxBuilder
             index1 = this.bonesMap[bone.parent];
         if (index1 != -1)
         {
-            Matrix4x4 matrix4x4_1 = new Matrix4x4();
             Matrix4x4 bindpose = this.bindposeList[index];
             Matrix4x4 worldToLocalMatrix = this.boneList[index1].worldToLocalMatrix;
             Matrix4x4 inverse = worldToLocalMatrix.inverse;

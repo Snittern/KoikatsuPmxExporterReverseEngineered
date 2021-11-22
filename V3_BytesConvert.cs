@@ -55,9 +55,9 @@ namespace PmxLib
 
     public static Color Vector3ToColor(Vector3 v) => new Color()
     {
-      r = (__Null) (double) v.x,
-      g = (__Null) (double) v.y,
-      b = (__Null) (double) v.z
+      r = (float) v.x,
+      g = (float) v.y,
+      b = (float) v.z
     };
 
     public static Vector3 ColorToVector3(Color color) => new Vector3()
