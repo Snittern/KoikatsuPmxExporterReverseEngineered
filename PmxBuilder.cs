@@ -664,8 +664,8 @@ internal class PmxBuilder
         PmxBone pmxBone1 = new PmxBone();
         pmxBone1.Name = (transform).name;
         pmxBone1.Parent = transformList.IndexOf(transform.parent) + count;
-        Vector3 vector3_1 = Vector3.op_Multiply(((Component)transform).transform.position, (float)this.scale);
-        pmxBone1.Position = new Vector3((float)-vector3_1.x, (float)vector3_1.y, (float)-vector3_1.z);
+        var vector3_1 = transform.transform.position * this.scale;
+        pmxBone1.Position = new PmxLib.Vector3((float)-vector3_1.x, (float)vector3_1.y, (float)-vector3_1.z);
         transformList.Add(transform);
         this.pmxFile.BoneList.Add(pmxBone1);
         for (int index = 0; index < componentsInChildren.Length; ++index)
@@ -673,8 +673,8 @@ internal class PmxBuilder
             PmxBone pmxBone2 = new PmxBone();
             pmxBone2.Name = (componentsInChildren[index]).name;
             pmxBone2.Parent = transformList.IndexOf(componentsInChildren[index].parent) + count;
-            Vector3 vector3_2 = Vector3.op_Multiply(((Component)componentsInChildren[index]).transform.position, (float)this.scale);
-            pmxBone2.Position = new Vector3((float)-vector3_2.x, (float)vector3_2.y, (float)-vector3_2.z);
+            var vector3_2 = ((Component)componentsInChildren[index]).transform.position * this.scale;
+            pmxBone2.Position = new PmxLib.Vector3((float)-vector3_2.x, (float)vector3_2.y, (float)-vector3_2.z);
             transformList.Add(componentsInChildren[index]);
             this.pmxFile.BoneList.Add(pmxBone2);
         }
@@ -683,7 +683,7 @@ internal class PmxBuilder
     private void addhitomimorph()
     {
         int num1 = 0;
-        foreach (Object componentsInChild in ((Component)GameObject.Find("BodyTop").transform).GetComponentsInChildren<SkinnedMeshRenderer>())
+        foreach (var componentsInChild in ((Component)GameObject.Find("BodyTop").transform).GetComponentsInChildren<SkinnedMeshRenderer>())
         {
             ++num1;
             if (componentsInChild.name.Contains("hitomi"))
@@ -701,8 +701,6 @@ internal class PmxBuilder
         this.hitomi[1] = new List<int>();
         for (int index = 0; index < this.vertics_num[num1 + 2]; ++index)
             this.hitomi[1].Add(num2 + num3 + index);
-        List<Vector2> vector2List = new List<Vector2>();
-        List<int> intList = new List<int>();
         float num4 = 0.0f;
         float num5 = 0.0f;
         for (int index = 0; index < this.hitomi[0].Count; ++index)
@@ -728,12 +726,12 @@ internal class PmxBuilder
         pmxMorph1.Kind = PmxMorph.OffsetKind.UV;
         for (int index = 0; index < this.hitomi[0].Count; ++index)
         {
-            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[0][index], (Vector4)new Vector2(this.pmxFile.VertexList[this.hitomi[0][index]].UV.x - num6, 0.0f));
+            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[0][index], new PmxLib.Vector2(this.pmxFile.VertexList[this.hitomi[0][index]].UV.x - num6, 0.0f));
             pmxMorph1.OffsetList.Add((PmxBaseMorph)pmxUvMorph);
         }
         for (int index = 0; index < this.hitomi[1].Count; ++index)
         {
-            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[1][index], (Vector4)new Vector2(this.pmxFile.VertexList[this.hitomi[1][index]].UV.x - num10, 0.0f));
+            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[1][index], new PmxLib.Vector2(this.pmxFile.VertexList[this.hitomi[1][index]].UV.x - num10, 0.0f));
             pmxMorph1.OffsetList.Add((PmxBaseMorph)pmxUvMorph);
         }
         this.pmxFile.MorphList.Add(pmxMorph1);
@@ -744,12 +742,12 @@ internal class PmxBuilder
         pmxMorph2.Kind = PmxMorph.OffsetKind.UV;
         for (int index = 0; index < this.hitomi[0].Count; ++index)
         {
-            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[0][index], (Vector4)new Vector2(0.0f, this.pmxFile.VertexList[this.hitomi[0][index]].UV.y - num7));
+            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[0][index], new PmxLib.Vector2(0.0f, this.pmxFile.VertexList[this.hitomi[0][index]].UV.y - num7));
             pmxMorph2.OffsetList.Add((PmxBaseMorph)pmxUvMorph);
         }
         for (int index = 0; index < this.hitomi[1].Count; ++index)
         {
-            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[1][index], (Vector4)new Vector2(0.0f, this.pmxFile.VertexList[this.hitomi[1][index]].UV.y - num11));
+            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[1][index], new PmxLib.Vector2(0.0f, this.pmxFile.VertexList[this.hitomi[1][index]].UV.y - num11));
             pmxMorph2.OffsetList.Add((PmxBaseMorph)pmxUvMorph);
         }
         this.pmxFile.MorphList.Add(pmxMorph2);
@@ -760,12 +758,12 @@ internal class PmxBuilder
         pmxMorph3.Kind = PmxMorph.OffsetKind.UV;
         for (int index = 0; index < this.hitomi[0].Count; ++index)
         {
-            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[0][index], (Vector4)new Vector2((float)-((double)this.pmxFile.VertexList[this.hitomi[0][index]].UV.x - (double)num6), 0.0f));
+            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[0][index], new PmxLib.Vector2((float)-((double)this.pmxFile.VertexList[this.hitomi[0][index]].UV.x - (double)num6), 0.0f));
             pmxMorph3.OffsetList.Add((PmxBaseMorph)pmxUvMorph);
         }
         for (int index = 0; index < this.hitomi[1].Count; ++index)
         {
-            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[1][index], (Vector4)new Vector2((float)-((double)this.pmxFile.VertexList[this.hitomi[1][index]].UV.x - (double)num10), 0.0f));
+            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[1][index], new PmxLib.Vector2((float)-((double)this.pmxFile.VertexList[this.hitomi[1][index]].UV.x - (double)num10), 0.0f));
             pmxMorph3.OffsetList.Add((PmxBaseMorph)pmxUvMorph);
         }
         this.pmxFile.MorphList.Add(pmxMorph3);
@@ -776,12 +774,12 @@ internal class PmxBuilder
         pmxMorph4.Kind = PmxMorph.OffsetKind.UV;
         for (int index = 0; index < this.hitomi[0].Count; ++index)
         {
-            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[0][index], (Vector4)new Vector2(0.0f, (float)-((double)this.pmxFile.VertexList[this.hitomi[0][index]].UV.y - (double)num7)));
+            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[0][index], new PmxLib.Vector2(0.0f, (float)-((double)this.pmxFile.VertexList[this.hitomi[0][index]].UV.y - (double)num7)));
             pmxMorph4.OffsetList.Add((PmxBaseMorph)pmxUvMorph);
         }
         for (int index = 0; index < this.hitomi[1].Count; ++index)
         {
-            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[1][index], (Vector4)new Vector2(0.0f, (float)-((double)this.pmxFile.VertexList[this.hitomi[1][index]].UV.y - (double)num11)));
+            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[1][index], new PmxLib.Vector2(0.0f, (float)-((double)this.pmxFile.VertexList[this.hitomi[1][index]].UV.y - (double)num11)));
             pmxMorph4.OffsetList.Add((PmxBaseMorph)pmxUvMorph);
         }
         this.pmxFile.MorphList.Add(pmxMorph4);
@@ -792,12 +790,12 @@ internal class PmxBuilder
         pmxMorph5.Kind = PmxMorph.OffsetKind.UV;
         for (int index = 0; index < this.hitomi[0].Count; ++index)
         {
-            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[0][index], (Vector4)new Vector2(0.0f, 0.5f));
+            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[0][index], new PmxLib.Vector2(0.0f, 0.5f));
             pmxMorph5.OffsetList.Add((PmxBaseMorph)pmxUvMorph);
         }
         for (int index = 0; index < this.hitomi[1].Count; ++index)
         {
-            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[1][index], (Vector4)new Vector2(0.0f, 0.5f));
+            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[1][index], new PmxLib.Vector2(0.0f, 0.5f));
             pmxMorph5.OffsetList.Add((PmxBaseMorph)pmxUvMorph);
         }
         this.pmxFile.MorphList.Add(pmxMorph5);
@@ -808,12 +806,12 @@ internal class PmxBuilder
         pmxMorph6.Kind = PmxMorph.OffsetKind.UV;
         for (int index = 0; index < this.hitomi[0].Count; ++index)
         {
-            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[0][index], (Vector4)new Vector2(0.0f, -0.5f));
+            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[0][index], new PmxLib.Vector2(0.0f, -0.5f));
             pmxMorph6.OffsetList.Add((PmxBaseMorph)pmxUvMorph);
         }
         for (int index = 0; index < this.hitomi[1].Count; ++index)
         {
-            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[1][index], (Vector4)new Vector2(0.0f, -0.5f));
+            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[1][index], new PmxLib.Vector2(0.0f, -0.5f));
             pmxMorph6.OffsetList.Add((PmxBaseMorph)pmxUvMorph);
         }
         this.pmxFile.MorphList.Add(pmxMorph6);
@@ -824,12 +822,12 @@ internal class PmxBuilder
         pmxMorph7.Kind = PmxMorph.OffsetKind.UV;
         for (int index = 0; index < this.hitomi[0].Count; ++index)
         {
-            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[0][index], (Vector4)new Vector2(-0.5f, 0.0f));
+            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[0][index], new PmxLib.Vector2(-0.5f, 0.0f));
             pmxMorph7.OffsetList.Add((PmxBaseMorph)pmxUvMorph);
         }
         for (int index = 0; index < this.hitomi[1].Count; ++index)
         {
-            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[1][index], (Vector4)new Vector2(0.5f, 0.0f));
+            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[1][index], new PmxLib.Vector2(0.5f, 0.0f));
             pmxMorph7.OffsetList.Add((PmxBaseMorph)pmxUvMorph);
         }
         this.pmxFile.MorphList.Add(pmxMorph7);
@@ -840,12 +838,12 @@ internal class PmxBuilder
         pmxMorph8.Kind = PmxMorph.OffsetKind.UV;
         for (int index = 0; index < this.hitomi[0].Count; ++index)
         {
-            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[0][index], (Vector4)new Vector2(0.5f, 0.0f));
+            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[0][index], new PmxLib.Vector2(0.5f, 0.0f));
             pmxMorph8.OffsetList.Add((PmxBaseMorph)pmxUvMorph);
         }
         for (int index = 0; index < this.hitomi[1].Count; ++index)
         {
-            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[1][index], (Vector4)new Vector2(-0.5f, 0.0f));
+            PmxUVMorph pmxUvMorph = new PmxUVMorph(this.hitomi[1][index], new PmxLib.Vector2(-0.5f, 0.0f));
             pmxMorph8.OffsetList.Add((PmxBaseMorph)pmxUvMorph);
         }
         this.pmxFile.MorphList.Add(pmxMorph8);
@@ -1003,13 +1001,13 @@ internal class PmxBuilder
         pmxMorph.Kind = PmxMorph.OffsetKind.Bone;
         PmxBoneMorph pmxBoneMorph1 = new PmxBoneMorph();
         pmxBoneMorph1.Index = this.sbi("右腕");
-        Quaternion quaternion1 = Quaternion.Euler(0.0f, 0.0f, 35f);
-        pmxBoneMorph1.Rotaion = new Quaternion(new Vector3((float)quaternion1.x, (float)quaternion1.y, (float)quaternion1.z), (float)quaternion1.w);
+        var quaternion1 = UnityEngine.Quaternion.Euler(0.0f, 0.0f, 35f);
+        pmxBoneMorph1.Rotaion = new PmxLib.Quaternion(new PmxLib.Vector3((float)quaternion1.x, (float)quaternion1.y, (float)quaternion1.z), (float)quaternion1.w);
         pmxMorph.OffsetList.Add((PmxBaseMorph)pmxBoneMorph1);
         PmxBoneMorph pmxBoneMorph2 = new PmxBoneMorph();
         pmxBoneMorph2.Index = this.sbi("左腕");
-        Quaternion quaternion2 = Quaternion.Euler(0.0f, 0.0f, -35f);
-        pmxBoneMorph2.Rotaion = new Quaternion(new Vector3((float)quaternion2.x, (float)quaternion2.y, (float)quaternion2.z), (float)quaternion2.w);
+        var quaternion2 = UnityEngine.Quaternion.Euler(0.0f, 0.0f, -35f);
+        pmxBoneMorph2.Rotaion = new PmxLib.Quaternion(new PmxLib.Vector3((float)quaternion2.x, (float)quaternion2.y, (float)quaternion2.z), (float)quaternion2.w);
         pmxMorph.OffsetList.Add((PmxBaseMorph)pmxBoneMorph2);
         this.pmxFile.MorphList.Add(pmxMorph);
     }
@@ -1049,34 +1047,34 @@ internal class PmxBuilder
         PmxBone pmxBone1 = this.sb("cf_j_bust02_L");
         pmxBone1.Name = "左AH1";
         pmxBone1.To_Bone = this.sbi("左AH2");
-        pmxBone1.Position = new Vector3(this.sb("cf_j_bust01_L").Position);
+        pmxBone1.Position = new PmxLib.Vector3(this.sb("cf_j_bust01_L").Position);
         pmxBone1.Flags = PmxBone.BoneFlags.ToBone | PmxBone.BoneFlags.Rotation | PmxBone.BoneFlags.Translation | PmxBone.BoneFlags.Visible | PmxBone.BoneFlags.Enable;
         PmxBone pmxBone2 = this.sb("左胸操作");
         pmxBone2.Name = "左胸操作";
         pmxBone2.Parent = this.sbi("胸親");
-        pmxBone2.Position = this.sb("左AH1").Position + new Vector3(0.0f, 0.0f, -0.213f);
+        pmxBone2.Position = this.sb("左AH1").Position + new PmxLib.Vector3(0.0f, 0.0f, -0.213f);
         pmxBone2.Flags = PmxBone.BoneFlags.Rotation | PmxBone.BoneFlags.Translation | PmxBone.BoneFlags.Visible | PmxBone.BoneFlags.Enable;
         PmxBone pmxBone3 = this.sb("左AH2");
         pmxBone3.Parent = this.sbi("左AH1");
-        pmxBone3.Position = this.sb("左AH1").Position + new Vector3(0.0f, 0.0f, -1.515f);
+        pmxBone3.Position = this.sb("左AH1").Position + new PmxLib.Vector3(0.0f, 0.0f, -1.515f);
         pmxBone3.Flags = PmxBone.BoneFlags.Rotation | PmxBone.BoneFlags.Translation | PmxBone.BoneFlags.Enable;
         PmxBone pmxBone4 = this.sb("cf_j_bust02_R");
         pmxBone4.Name = "右AH1";
         pmxBone4.To_Bone = this.sbi("右AH2");
-        pmxBone4.Position = new Vector3(this.sb("cf_j_bust01_R").Position);
+        pmxBone4.Position = new PmxLib.Vector3(this.sb("cf_j_bust01_R").Position);
         pmxBone4.Flags = PmxBone.BoneFlags.ToBone | PmxBone.BoneFlags.Rotation | PmxBone.BoneFlags.Translation | PmxBone.BoneFlags.Visible | PmxBone.BoneFlags.Enable;
         PmxBone pmxBone5 = this.sb("右胸操作");
         pmxBone5.Name = "右胸操作";
         pmxBone5.Parent = this.sbi("胸親");
-        pmxBone5.Position = this.sb("右AH1").Position + new Vector3(0.0f, 0.0f, -0.213f);
+        pmxBone5.Position = this.sb("右AH1").Position + new PmxLib.Vector3(0.0f, 0.0f, -0.213f);
         pmxBone5.Flags = PmxBone.BoneFlags.Rotation | PmxBone.BoneFlags.Translation | PmxBone.BoneFlags.Visible | PmxBone.BoneFlags.Enable;
         PmxBone pmxBone6 = this.sb("右AH2");
         pmxBone6.Parent = this.sbi("右AH1");
-        pmxBone6.Position = this.sb("右AH1").Position + new Vector3(0.0f, 0.0f, -1.515f);
+        pmxBone6.Position = this.sb("右AH1").Position + new PmxLib.Vector3(0.0f, 0.0f, -1.515f);
         pmxBone6.Flags = PmxBone.BoneFlags.Rotation | PmxBone.BoneFlags.Translation | PmxBone.BoneFlags.Enable;
         PmxBone pmxBone7 = this.sb("胸親");
         pmxBone7.Parent = this.sbi("上半身2");
-        pmxBone7.Position = new Vector3(this.sb("右胸操作").Position);
+        pmxBone7.Position = new PmxLib.Vector3(this.sb("右胸操作").Position);
         pmxBone7.Position.x = 0.0f;
         pmxBone7.Flags = PmxBone.BoneFlags.Rotation | PmxBone.BoneFlags.Translation | PmxBone.BoneFlags.Visible | PmxBone.BoneFlags.Enable;
     }
