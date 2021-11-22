@@ -1,6 +1,0 @@
-C:\Users\james\Documents\modeling\testbeping\PMXRedux2\obj\Debug\net35\PMXRedux2.csproj.AssemblyReference.cache
-C:\Users\james\Documents\modeling\testbeping\PMXRedux2\obj\Debug\net35\PluginInfo.cs
-C:\Users\james\Documents\modeling\testbeping\PMXRedux2\obj\Debug\net35\PMXRedux2.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\james\Documents\modeling\testbeping\PMXRedux2\obj\Debug\net35\PMXRedux2.AssemblyInfoInputs.cache
-C:\Users\james\Documents\modeling\testbeping\PMXRedux2\obj\Debug\net35\PMXRedux2.AssemblyInfo.cs
-C:\Users\james\Documents\modeling\testbeping\PMXRedux2\obj\Debug\net35\PMXRedux2.csproj.CoreCompileInputs.cache

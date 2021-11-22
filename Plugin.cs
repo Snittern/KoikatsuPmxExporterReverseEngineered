@@ -31,11 +31,11 @@ namespace PMXRedux2
         {
             if (this.destroyed)
                 return;
-            Animator[] objectsOfType = Object.FindObjectsOfType<Animator>();
+            /*Animator[] objectsOfType = Object.FindObjectsOfType<Animator>();
             if ((uint)objectsOfType.Length > 0U)
                 this.destroyed = true;
             foreach (Object @object in objectsOfType)
-                Object.Destroy(@object);
+                Object.Destroy(@object);*/
         }
     }
 
