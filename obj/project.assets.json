@@ -1,0 +1,551 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v3.5": {
+      "BepInEx.Analyzers/1.0.7": {
+        "type": "package"
+      },
+      "BepInEx.Core/6.0.0-be.521": {
+        "type": "package",
+        "dependencies": {
+          "HarmonyX": "2.5.7",
+          "MonoMod.Utils": "21.10.10.1",
+          "SemanticVersioning": "2.0.0"
+        },
+        "compile": {
+          "lib/net35/BepInEx.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net35/_._": {}
+        }
+      },
+      "BepInEx.PluginInfoProps/1.1.0": {
+        "type": "package",
+        "build": {
+          "build/BepInEx.PluginInfoProps.props": {}
+        }
+      },
+      "BepInEx.Unity/6.0.0-be.521": {
+        "type": "package",
+        "dependencies": {
+          "BepInEx.Core": "6.0.0-be.521",
+          "HarmonyX": "2.5.7",
+          "UnityEngine": "5.6.1"
+        },
+        "compile": {
+          "lib/net35/BepInEx.Unity.dll": {}
+        },
+        "runtime": {
+          "lib/net35/_._": {}
+        }
+      },
+      "HarmonyX/2.5.7": {
+        "type": "package",
+        "dependencies": {
+          "MonoMod.RuntimeDetour": "21.10.10.1"
+        },
+        "compile": {
+          "lib/net35/0Harmony.dll": {}
+        },
+        "runtime": {
+          "lib/net35/_._": {}
+        }
+      },
+      "Microsoft.NETFramework.ReferenceAssemblies/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETFramework.ReferenceAssemblies.net35": "1.0.2"
+        }
+      },
+      "Microsoft.NETFramework.ReferenceAssemblies.net35/1.0.2": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NETFramework.ReferenceAssemblies.net35.targets": {}
+        }
+      },
+      "Mono.Cecil/0.10.4": {
+        "type": "package",
+        "compile": {
+          "lib/net35/Mono.Cecil.Mdb.dll": {},
+          "lib/net35/Mono.Cecil.Pdb.dll": {},
+          "lib/net35/Mono.Cecil.Rocks.dll": {},
+          "lib/net35/Mono.Cecil.dll": {}
+        },
+        "runtime": {
+          "lib/net35/_._": {}
+        }
+      },
+      "MonoMod.RuntimeDetour/21.10.10.1": {
+        "type": "package",
+        "dependencies": {
+          "Mono.Cecil": "0.10.4",
+          "MonoMod.Utils": "21.10.10.1"
+        },
+        "compile": {
+          "lib/net35/MonoMod.RuntimeDetour.dll": {}
+        },
+        "runtime": {
+          "lib/net35/_._": {}
+        }
+      },
+      "MonoMod.Utils/21.10.10.1": {
+        "type": "package",
+        "dependencies": {
+          "Mono.Cecil": "0.10.4"
+        },
+        "compile": {
+          "lib/net35/MonoMod.Utils.dll": {}
+        },
+        "runtime": {
+          "lib/net35/_._": {}
+        }
+      },
+      "SemanticVersioning/2.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net35/SemanticVersioning.dll": {}
+        },
+        "runtime": {
+          "lib/net35/_._": {}
+        }
+      },
+      "UnityEngine/5.6.1": {
+        "type": "package",
+        "compile": {
+          "lib/net35/UnityEngine.dll": {}
+        },
+        "runtime": {
+          "lib/net35/_._": {}
+        }
+      },
+      "UnityEngine.Modules/5.6.2": {
+        "type": "package",
+        "compile": {
+          "lib/net35/UnityEngine.dll": {}
+        },
+        "runtime": {
+          "lib/net35/_._": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BepInEx.Analyzers/1.0.7": {
+      "sha512": "/RZ1GzpvD9Va5/pW+2Kce5rcaIX5mXiTvzwMqjgPGxsVzNGxt6wulw3zCS6jZYJWA1j4D5YQQ2jVbcz/Dkpjdg==",
+      "type": "package",
+      "path": "bepinex.analyzers/1.0.7",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        "analyzers/dotnet/cs/BepInEx.Analyzers.CodeFixes.dll",
+        "analyzers/dotnet/cs/BepInEx.Analyzers.dll",
+        "bepinex.analyzers.1.0.7.nupkg.sha512",
+        "bepinex.analyzers.nuspec",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "BepInEx.Core/6.0.0-be.521": {
+      "sha512": "O1UmrldEd72/0//LIdop26QuWwToNP3lXURfORKZGZv1Kp5nU03jS/hXIXEgDSzxRZJt5j+ffay7x+5eedXMbg==",
+      "type": "package",
+      "path": "bepinex.core/6.0.0-be.521",
+      "files": [
+        ".nupkg.metadata",
+        "bepinex.core.6.0.0-be.521.nupkg.sha512",
+        "bepinex.core.nuspec",
+        "lib/net35/BepInEx.Core.dll",
+        "lib/net35/BepInEx.Core.xml",
+        "lib/netstandard2.0/BepInEx.Core.dll",
+        "lib/netstandard2.0/BepInEx.Core.xml",
+        "lib/netstandard2.1/BepInEx.Core.dll",
+        "lib/netstandard2.1/BepInEx.Core.xml",
+        "logo.png"
+      ]
+    },
+    "BepInEx.PluginInfoProps/1.1.0": {
+      "sha512": "RqM3aaGs8Hc2m0D+8aSt9mv09rCMYNIF35NB3D6KA2zSpcXJh/9ZVWrPlIUJfA8KYzodSWcCMUexEW24fjwR3w==",
+      "type": "package",
+      "path": "bepinex.plugininfoprops/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        "bepinex.plugininfoprops.1.1.0.nupkg.sha512",
+        "bepinex.plugininfoprops.nuspec",
+        "build/BepInEx.PluginInfoProps.props"
+      ]
+    },
+    "BepInEx.Unity/6.0.0-be.521": {
+      "sha512": "EpqFIlF0RDgz72B66X3pMGdX7vDxuvfiMJ9CLDYnq3r9dh73OD/zptDYm4K9RDrtPFkrPt8I3kDGqKs1ZQzSfA==",
+      "type": "package",
+      "path": "bepinex.unity/6.0.0-be.521",
+      "files": [
+        ".nupkg.metadata",
+        "bepinex.unity.6.0.0-be.521.nupkg.sha512",
+        "bepinex.unity.nuspec",
+        "lib/net35/BepInEx.Unity.dll",
+        "lib/net35/BepInEx.Unity.xml",
+        "lib/netstandard2.0/BepInEx.Unity.dll",
+        "logo.png"
+      ]
+    },
+    "HarmonyX/2.5.7": {
+      "sha512": "BVQAIGbYKp6S6IoP4pduDFKT4ST6iO4WC/INHJDeK3y2CA1AyhNAgYuPTzap3TVfGFUwphNcDpWBTO7hMu5grw==",
+      "type": "package",
+      "path": "harmonyx/2.5.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "harmonyx.2.5.7.nupkg.sha512",
+        "harmonyx.nuspec",
+        "lib/net35/0Harmony.dll",
+        "lib/net35/0Harmony.xml",
+        "lib/net45/0Harmony.dll",
+        "lib/net45/0Harmony.xml",
+        "lib/netstandard2.0/0Harmony.dll",
+        "lib/netstandard2.0/0Harmony.xml",
+        "logo_mini.png"
+      ]
+    },
+    "Microsoft.NETFramework.ReferenceAssemblies/1.0.2": {
+      "sha512": "5/cSEVld+px/CuRrbohO/djfg6++eR6zGpy88MgqloXvkj//WXWpFZyu/OpkXPN0u5m+dN/EVwLNYFUxD4h2+A==",
+      "type": "package",
+      "path": "microsoft.netframework.referenceassemblies/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "microsoft.netframework.referenceassemblies.1.0.2.nupkg.sha512",
+        "microsoft.netframework.referenceassemblies.nuspec"
+      ]
+    },
+    "Microsoft.NETFramework.ReferenceAssemblies.net35/1.0.2": {
+      "sha512": "NEybA7YjNdIdX1CPMkWjUQvQ46Ze9PJQsE1uLzwEQsZqR0qY7ZH1Wmn6FFiYPS9J3lOgQ1lQcGIt09u26u5fmQ==",
+      "type": "package",
+      "path": "microsoft.netframework.referenceassemblies.net35/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/.NETFramework/v3.5/Accessibility.dll",
+        "build/.NETFramework/v3.5/AspNetMMCExt.dll",
+        "build/.NETFramework/v3.5/CustomMarshalers.dll",
+        "build/.NETFramework/v3.5/IEExecRemote.dll",
+        "build/.NETFramework/v3.5/IEHost.dll",
+        "build/.NETFramework/v3.5/IIEHost.dll",
+        "build/.NETFramework/v3.5/ISymWrapper.dll",
+        "build/.NETFramework/v3.5/Microsoft.Build.Conversion.v3.5.dll",
+        "build/.NETFramework/v3.5/Microsoft.Build.Conversion.v3.5.xml",
+        "build/.NETFramework/v3.5/Microsoft.Build.Engine.dll",
+        "build/.NETFramework/v3.5/Microsoft.Build.Engine.xml",
+        "build/.NETFramework/v3.5/Microsoft.Build.Framework.dll",
+        "build/.NETFramework/v3.5/Microsoft.Build.Framework.xml",
+        "build/.NETFramework/v3.5/Microsoft.Build.Tasks.dll",
+        "build/.NETFramework/v3.5/Microsoft.Build.Utilities.dll",
+        "build/.NETFramework/v3.5/Microsoft.Build.Utilities.v3.5.dll",
+        "build/.NETFramework/v3.5/Microsoft.Build.Utilities.v3.5.xml",
+        "build/.NETFramework/v3.5/Microsoft.JScript.dll",
+        "build/.NETFramework/v3.5/Microsoft.VisualBasic.Compatibility.Data.dll",
+        "build/.NETFramework/v3.5/Microsoft.VisualBasic.Compatibility.dll",
+        "build/.NETFramework/v3.5/Microsoft.VisualBasic.Vsa.dll",
+        "build/.NETFramework/v3.5/Microsoft.VisualBasic.dll",
+        "build/.NETFramework/v3.5/Microsoft.VisualC.STLCLR.dll",
+        "build/.NETFramework/v3.5/Microsoft.VisualC.STLCLR.xml",
+        "build/.NETFramework/v3.5/Microsoft.VisualC.dll",
+        "build/.NETFramework/v3.5/Microsoft.Vsa.Vb.CodeDOMProcessor.dll",
+        "build/.NETFramework/v3.5/Microsoft.Vsa.dll",
+        "build/.NETFramework/v3.5/Microsoft_VsaVb.dll",
+        "build/.NETFramework/v3.5/PresentationBuildTasks.dll",
+        "build/.NETFramework/v3.5/PresentationCore.dll",
+        "build/.NETFramework/v3.5/PresentationFramework.Aero.dll",
+        "build/.NETFramework/v3.5/PresentationFramework.Classic.dll",
+        "build/.NETFramework/v3.5/PresentationFramework.Luna.dll",
+        "build/.NETFramework/v3.5/PresentationFramework.Royale.dll",
+        "build/.NETFramework/v3.5/PresentationFramework.dll",
+        "build/.NETFramework/v3.5/ReachFramework.dll",
+        "build/.NETFramework/v3.5/RedistList/FrameworkList.xml",
+        "build/.NETFramework/v3.5/SubsetList/Client.xml",
+        "build/.NETFramework/v3.5/System.AddIn.Contract.dll",
+        "build/.NETFramework/v3.5/System.AddIn.Contract.xml",
+        "build/.NETFramework/v3.5/System.AddIn.dll",
+        "build/.NETFramework/v3.5/System.AddIn.xml",
+        "build/.NETFramework/v3.5/System.ComponentModel.DataAnnotations.dll",
+        "build/.NETFramework/v3.5/System.ComponentModel.DataAnnotations.xml",
+        "build/.NETFramework/v3.5/System.Configuration.Install.dll",
+        "build/.NETFramework/v3.5/System.Configuration.dll",
+        "build/.NETFramework/v3.5/System.Core.dll",
+        "build/.NETFramework/v3.5/System.Core.xml",
+        "build/.NETFramework/v3.5/System.Data.DataSetExtensions.dll",
+        "build/.NETFramework/v3.5/System.Data.DataSetExtensions.xml",
+        "build/.NETFramework/v3.5/System.Data.Entity.Design.dll",
+        "build/.NETFramework/v3.5/System.Data.Entity.Design.xml",
+        "build/.NETFramework/v3.5/System.Data.Entity.dll",
+        "build/.NETFramework/v3.5/System.Data.Entity.xml",
+        "build/.NETFramework/v3.5/System.Data.Linq.dll",
+        "build/.NETFramework/v3.5/System.Data.Linq.xml",
+        "build/.NETFramework/v3.5/System.Data.OracleClient.dll",
+        "build/.NETFramework/v3.5/System.Data.Services.Client.dll",
+        "build/.NETFramework/v3.5/System.Data.Services.Client.xml",
+        "build/.NETFramework/v3.5/System.Data.Services.Design.dll",
+        "build/.NETFramework/v3.5/System.Data.Services.Design.xml",
+        "build/.NETFramework/v3.5/System.Data.Services.dll",
+        "build/.NETFramework/v3.5/System.Data.Services.xml",
+        "build/.NETFramework/v3.5/System.Data.SqlXml.dll",
+        "build/.NETFramework/v3.5/System.Data.dll",
+        "build/.NETFramework/v3.5/System.Deployment.dll",
+        "build/.NETFramework/v3.5/System.Design.dll",
+        "build/.NETFramework/v3.5/System.DirectoryServices.AccountManagement.dll",
+        "build/.NETFramework/v3.5/System.DirectoryServices.AccountManagement.xml",
+        "build/.NETFramework/v3.5/System.DirectoryServices.Protocols.dll",
+        "build/.NETFramework/v3.5/System.DirectoryServices.dll",
+        "build/.NETFramework/v3.5/System.Drawing.Design.dll",
+        "build/.NETFramework/v3.5/System.Drawing.dll",
+        "build/.NETFramework/v3.5/System.EnterpriseServices.Thunk.dll",
+        "build/.NETFramework/v3.5/System.EnterpriseServices.Wrapper.dll",
+        "build/.NETFramework/v3.5/System.EnterpriseServices.dll",
+        "build/.NETFramework/v3.5/System.IO.Log.dll",
+        "build/.NETFramework/v3.5/System.IdentityModel.Selectors.dll",
+        "build/.NETFramework/v3.5/System.IdentityModel.dll",
+        "build/.NETFramework/v3.5/System.Management.Instrumentation.dll",
+        "build/.NETFramework/v3.5/System.Management.Instrumentation.xml",
+        "build/.NETFramework/v3.5/System.Management.dll",
+        "build/.NETFramework/v3.5/System.Messaging.dll",
+        "build/.NETFramework/v3.5/System.Net.dll",
+        "build/.NETFramework/v3.5/System.Net.xml",
+        "build/.NETFramework/v3.5/System.Printing.dll",
+        "build/.NETFramework/v3.5/System.Runtime.Remoting.dll",
+        "build/.NETFramework/v3.5/System.Runtime.Serialization.Formatters.Soap.dll",
+        "build/.NETFramework/v3.5/System.Runtime.Serialization.dll",
+        "build/.NETFramework/v3.5/System.Security.dll",
+        "build/.NETFramework/v3.5/System.ServiceModel.Web.dll",
+        "build/.NETFramework/v3.5/System.ServiceModel.Web.xml",
+        "build/.NETFramework/v3.5/System.ServiceModel.dll",
+        "build/.NETFramework/v3.5/System.ServiceProcess.dll",
+        "build/.NETFramework/v3.5/System.Speech.dll",
+        "build/.NETFramework/v3.5/System.Transactions.dll",
+        "build/.NETFramework/v3.5/System.Web.Abstractions.dll",
+        "build/.NETFramework/v3.5/System.Web.Abstractions.xml",
+        "build/.NETFramework/v3.5/System.Web.DynamicData.Design.dll",
+        "build/.NETFramework/v3.5/System.Web.DynamicData.Design.xml",
+        "build/.NETFramework/v3.5/System.Web.DynamicData.dll",
+        "build/.NETFramework/v3.5/System.Web.DynamicData.xml",
+        "build/.NETFramework/v3.5/System.Web.Entity.Design.dll",
+        "build/.NETFramework/v3.5/System.Web.Entity.Design.xml",
+        "build/.NETFramework/v3.5/System.Web.Entity.dll",
+        "build/.NETFramework/v3.5/System.Web.Entity.xml",
+        "build/.NETFramework/v3.5/System.Web.Extensions.Design.dll",
+        "build/.NETFramework/v3.5/System.Web.Extensions.Design.xml",
+        "build/.NETFramework/v3.5/System.Web.Extensions.dll",
+        "build/.NETFramework/v3.5/System.Web.Extensions.xml",
+        "build/.NETFramework/v3.5/System.Web.Mobile.dll",
+        "build/.NETFramework/v3.5/System.Web.RegularExpressions.dll",
+        "build/.NETFramework/v3.5/System.Web.Routing.dll",
+        "build/.NETFramework/v3.5/System.Web.Routing.xml",
+        "build/.NETFramework/v3.5/System.Web.Services.dll",
+        "build/.NETFramework/v3.5/System.Web.dll",
+        "build/.NETFramework/v3.5/System.Windows.Forms.dll",
+        "build/.NETFramework/v3.5/System.Windows.Presentation.dll",
+        "build/.NETFramework/v3.5/System.Windows.Presentation.xml",
+        "build/.NETFramework/v3.5/System.Workflow.Activities.dll",
+        "build/.NETFramework/v3.5/System.Workflow.ComponentModel.dll",
+        "build/.NETFramework/v3.5/System.Workflow.Runtime.dll",
+        "build/.NETFramework/v3.5/System.WorkflowServices.dll",
+        "build/.NETFramework/v3.5/System.WorkflowServices.xml",
+        "build/.NETFramework/v3.5/System.Xml.Linq.dll",
+        "build/.NETFramework/v3.5/System.Xml.Linq.xml",
+        "build/.NETFramework/v3.5/System.Xml.dll",
+        "build/.NETFramework/v3.5/System.dll",
+        "build/.NETFramework/v3.5/UIAutomationClient.dll",
+        "build/.NETFramework/v3.5/UIAutomationClientsideProviders.dll",
+        "build/.NETFramework/v3.5/UIAutomationProvider.dll",
+        "build/.NETFramework/v3.5/UIAutomationTypes.dll",
+        "build/.NETFramework/v3.5/WinFXList.xml",
+        "build/.NETFramework/v3.5/WindowsBase.dll",
+        "build/.NETFramework/v3.5/WindowsFormsIntegration.dll",
+        "build/.NETFramework/v3.5/cscompmgd.dll",
+        "build/.NETFramework/v3.5/mscorlib.dll",
+        "build/.NETFramework/v3.5/sysglobl.dll",
+        "build/Microsoft.NETFramework.ReferenceAssemblies.net35.targets",
+        "microsoft.netframework.referenceassemblies.net35.1.0.2.nupkg.sha512",
+        "microsoft.netframework.referenceassemblies.net35.nuspec"
+      ]
+    },
+    "Mono.Cecil/0.10.4": {
+      "sha512": "BHukPf7zfXu+akTcFEAWvU4x3hVMMIDC+ihGAl/+8OozrY0f/ajrpuaSUf2Q3Xvgsge5NryvOkjtyhV5TNXoSg==",
+      "type": "package",
+      "path": "mono.cecil/0.10.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/Mono.Cecil.Mdb.dll",
+        "lib/net35/Mono.Cecil.Pdb.dll",
+        "lib/net35/Mono.Cecil.Rocks.dll",
+        "lib/net35/Mono.Cecil.dll",
+        "lib/net40/Mono.Cecil.Mdb.dll",
+        "lib/net40/Mono.Cecil.Pdb.dll",
+        "lib/net40/Mono.Cecil.Rocks.dll",
+        "lib/net40/Mono.Cecil.dll",
+        "lib/netstandard1.3/Mono.Cecil.Mdb.dll",
+        "lib/netstandard1.3/Mono.Cecil.Pdb.dll",
+        "lib/netstandard1.3/Mono.Cecil.Rocks.dll",
+        "lib/netstandard1.3/Mono.Cecil.dll",
+        "mono.cecil.0.10.4.nupkg.sha512",
+        "mono.cecil.nuspec"
+      ]
+    },
+    "MonoMod.RuntimeDetour/21.10.10.1": {
+      "sha512": "cZFLf8kCTqGAznnrGfAX8tRrMrHFH8hFHtX/Cr/CFZOcHFZZICUA03Cmjs97uoquvKpV1D2YEHGhtLprPj+ZUg==",
+      "type": "package",
+      "path": "monomod.runtimedetour/21.10.10.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/MonoMod.RuntimeDetour.dll",
+        "lib/net35/MonoMod.RuntimeDetour.xml",
+        "lib/net40/MonoMod.RuntimeDetour.dll",
+        "lib/net40/MonoMod.RuntimeDetour.xml",
+        "lib/net5.0/MonoMod.RuntimeDetour.dll",
+        "lib/net5.0/MonoMod.RuntimeDetour.xml",
+        "lib/netstandard2.0/MonoMod.RuntimeDetour.dll",
+        "lib/netstandard2.0/MonoMod.RuntimeDetour.xml",
+        "monomod.runtimedetour.21.10.10.1.nupkg.sha512",
+        "monomod.runtimedetour.nuspec"
+      ]
+    },
+    "MonoMod.Utils/21.10.10.1": {
+      "sha512": "y1ZION4RwtrnLYmE4SqI2Mnk9zZgwQlxUnfdwe0MJS8KWuSi9tU1h6RUZFaEUWSSiVE12Q2wba1Sv45j33+DLw==",
+      "type": "package",
+      "path": "monomod.utils/21.10.10.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/MonoMod.Utils.dll",
+        "lib/net35/MonoMod.Utils.xml",
+        "lib/net40/MonoMod.Utils.dll",
+        "lib/net40/MonoMod.Utils.xml",
+        "lib/net5.0/MonoMod.Utils.dll",
+        "lib/net5.0/MonoMod.Utils.xml",
+        "lib/netstandard2.0/MonoMod.Utils.dll",
+        "lib/netstandard2.0/MonoMod.Utils.xml",
+        "monomod.utils.21.10.10.1.nupkg.sha512",
+        "monomod.utils.nuspec"
+      ]
+    },
+    "SemanticVersioning/2.0.0": {
+      "sha512": "gb+AtYpacsOpphUUfx4xU5BaMSho0yqSgIl1YL2tBUc1FfdzAAFkxYbmz+hlzSZAUtjWgSsIs7R7hNdMufThAQ==",
+      "type": "package",
+      "path": "semanticversioning/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/SemanticVersioning.dll",
+        "lib/net45/SemanticVersioning.dll",
+        "lib/netstandard1.1/SemanticVersioning.dll",
+        "lib/netstandard2.0/SemanticVersioning.dll",
+        "semanticversioning.2.0.0.nupkg.sha512",
+        "semanticversioning.nuspec"
+      ]
+    },
+    "UnityEngine/5.6.1": {
+      "sha512": "uAhM+pBtZH7CvGCBQyT9CaksT9M4fzTCIMetYjOEocuFiQGF38uGgS8q5xUd1HddaeXwDG9VrMARHGz5IXhQLw==",
+      "type": "package",
+      "path": "unityengine/5.6.1",
+      "files": [
+        ".nupkg.metadata",
+        "lib/net35/UnityEngine.dll",
+        "lib/netstandard2.0/UnityEngine.dll",
+        "unityengine.5.6.1.nupkg.sha512",
+        "unityengine.nuspec"
+      ]
+    },
+    "UnityEngine.Modules/5.6.2": {
+      "sha512": "EzhXldoJbpuqAGks0stNRAkD5tYn98z12cmaHLkwQvDtVhgqRtPqhgJ4hC59BULXVeCV094+CaNRn+VD42hf1w==",
+      "type": "package",
+      "path": "unityengine.modules/5.6.2",
+      "files": [
+        ".nupkg.metadata",
+        "lib/net35/UnityEngine.dll",
+        "lib/net45/UnityEngine.dll",
+        "lib/netstandard2.0/UnityEngine.dll",
+        "unityengine.modules.5.6.2.nupkg.sha512",
+        "unityengine.modules.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v3.5": [
+      "BepInEx.Analyzers >= 1.*",
+      "BepInEx.PluginInfoProps >= 1.*",
+      "BepInEx.Unity >= 6.0.0-*",
+      "Microsoft.NETFramework.ReferenceAssemblies >= 1.0.2",
+      "UnityEngine.Modules >= 5.6.2"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\james\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\james\\Documents\\modeling\\testbeping\\PMXRedux2\\PMXRedux2.csproj",
+      "projectName": "PMXRedux2",
+      "projectPath": "C:\\Users\\james\\Documents\\modeling\\testbeping\\PMXRedux2\\PMXRedux2.csproj",
+      "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\james\\Documents\\modeling\\testbeping\\PMXRedux2\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\james\\Documents\\modeling\\testbeping\\PMXRedux2\\NuGet.Config",
+        "C:\\Users\\james\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net35"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nuget.bepinex.dev/v3/index.json": {}
+      },
+      "frameworks": {
+        "net35": {
+          "targetAlias": "net35",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net35": {
+        "targetAlias": "net35",
+        "dependencies": {
+          "BepInEx.Analyzers": {
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[1.*, )"
+          },
+          "BepInEx.PluginInfoProps": {
+            "target": "Package",
+            "version": "[1.*, )"
+          },
+          "BepInEx.Unity": {
+            "include": "Compile",
+            "target": "Package",
+            "version": "[6.0.0-*, )"
+          },
+          "Microsoft.NETFramework.ReferenceAssemblies": {
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[1.0.2, )"
+          },
+          "UnityEngine.Modules": {
+            "include": "Compile",
+            "target": "Package",
+            "version": "[5.6.2, )"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

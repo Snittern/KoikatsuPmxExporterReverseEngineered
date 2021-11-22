@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dgSpecHash": "KW0cjuuKKPjCfTtzggqYXujJUFAD/05g7zRxfSgxkVkcKhPq5h7Q1wS9TwLMGFrg4FJciJJzWr9qfd96ENM8kA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\james\\Documents\\modeling\\testbeping\\PMXRedux2\\PMXRedux2.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\james\\.nuget\\packages\\bepinex.analyzers\\1.0.7\\bepinex.analyzers.1.0.7.nupkg.sha512",
+    "C:\\Users\\james\\.nuget\\packages\\bepinex.core\\6.0.0-be.521\\bepinex.core.6.0.0-be.521.nupkg.sha512",
+    "C:\\Users\\james\\.nuget\\packages\\bepinex.plugininfoprops\\1.1.0\\bepinex.plugininfoprops.1.1.0.nupkg.sha512",
+    "C:\\Users\\james\\.nuget\\packages\\bepinex.unity\\6.0.0-be.521\\bepinex.unity.6.0.0-be.521.nupkg.sha512",
+    "C:\\Users\\james\\.nuget\\packages\\harmonyx\\2.5.7\\harmonyx.2.5.7.nupkg.sha512",
+    "C:\\Users\\james\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.2\\microsoft.netframework.referenceassemblies.1.0.2.nupkg.sha512",
+    "C:\\Users\\james\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net35\\1.0.2\\microsoft.netframework.referenceassemblies.net35.1.0.2.nupkg.sha512",
+    "C:\\Users\\james\\.nuget\\packages\\mono.cecil\\0.10.4\\mono.cecil.0.10.4.nupkg.sha512",
+    "C:\\Users\\james\\.nuget\\packages\\monomod.runtimedetour\\21.10.10.1\\monomod.runtimedetour.21.10.10.1.nupkg.sha512",
+    "C:\\Users\\james\\.nuget\\packages\\monomod.utils\\21.10.10.1\\monomod.utils.21.10.10.1.nupkg.sha512",
+    "C:\\Users\\james\\.nuget\\packages\\semanticversioning\\2.0.0\\semanticversioning.2.0.0.nupkg.sha512",
+    "C:\\Users\\james\\.nuget\\packages\\unityengine\\5.6.1\\unityengine.5.6.1.nupkg.sha512",
+    "C:\\Users\\james\\.nuget\\packages\\unityengine.modules\\5.6.2\\unityengine.modules.5.6.2.nupkg.sha512"
+  ],
+  "logs": []
+}
