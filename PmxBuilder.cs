@@ -1086,9 +1086,9 @@ internal class PmxBuilder
         {
             SkinnedMeshRenderer skinnedMeshRenderer = fbsTargetInfo.GetSkinnedMeshRenderer();
             int blendShapeCount = skinnedMeshRenderer.sharedMesh.blendShapeCount;
-            Vector3[] vector3Array1 = new Vector3[skinnedMeshRenderer.sharedMesh.vertices.Length];
-            Vector3[] vector3Array2 = new Vector3[skinnedMeshRenderer.sharedMesh.normals.Length];
-            Vector3[] vector3Array3 = new Vector3[skinnedMeshRenderer.sharedMesh.tangents.Length];
+            var vector3Array1 = new UnityEngine.Vector3[skinnedMeshRenderer.sharedMesh.vertices.Length];
+            var vector3Array2 = new UnityEngine.Vector3[skinnedMeshRenderer.sharedMesh.normals.Length];
+            var vector3Array3 = new UnityEngine.Vector3[skinnedMeshRenderer.sharedMesh.tangents.Length];
             int num = 0;
             for (int index = 0; index < this.vertics_num.Length && this.vertics_num[index] != vector3Array1.Length; ++index)
                 num += this.vertics_num[index];
@@ -1104,7 +1104,7 @@ internal class PmxBuilder
                     pmxMorph.Kind = PmxMorph.OffsetKind.Vertex;
                     for (int index2 = 0; index2 < vector3Array1.Length; ++index2)
                     {
-                        PmxVertexMorph pmxVertexMorph = new PmxVertexMorph(num + index2, new Vector3((float)-vector3Array1[index2].x, (float)vector3Array1[index2].y, (float)-vector3Array1[index2].z));
+                        PmxVertexMorph pmxVertexMorph = new PmxVertexMorph(num + index2, new PmxLib.Vector3((float)-vector3Array1[index2].x, (float)vector3Array1[index2].y, (float)-vector3Array1[index2].z));
                         pmxVertexMorph.Offset *= (float)this.scale;
                         pmxMorph.OffsetList.Add((PmxBaseMorph)pmxVertexMorph);
                     }
@@ -1116,9 +1116,9 @@ internal class PmxBuilder
         {
             SkinnedMeshRenderer skinnedMeshRenderer = fbsTargetInfo.GetSkinnedMeshRenderer();
             int blendShapeCount = skinnedMeshRenderer.sharedMesh.blendShapeCount;
-            Vector3[] vector3Array4 = new Vector3[skinnedMeshRenderer.sharedMesh.vertices.Length];
-            Vector3[] vector3Array5 = new Vector3[skinnedMeshRenderer.sharedMesh.normals.Length];
-            Vector3[] vector3Array6 = new Vector3[skinnedMeshRenderer.sharedMesh.tangents.Length];
+            var vector3Array4 = new UnityEngine.Vector3[skinnedMeshRenderer.sharedMesh.vertices.Length];
+            var vector3Array5 = new UnityEngine.Vector3[skinnedMeshRenderer.sharedMesh.normals.Length];
+            var vector3Array6 = new UnityEngine.Vector3[skinnedMeshRenderer.sharedMesh.tangents.Length];
             int num = 0;
             for (int index = 0; index < this.vertics_num.Length && this.vertics_num[index] != vector3Array4.Length; ++index)
                 num += this.vertics_num[index];

@@ -15,6 +15,12 @@
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*" />
 	<PackageReference Include="UnityEngine.Modules" Version="5.6.2" IncludeAssets="compile" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Koikatsu">
+      <HintPath>D:\D\[ScrewThisNoise] Koikatsu BetterRepack RX12\[ScrewThisNoise] Koikatsu BetterRepack RX12\Koikatu_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
