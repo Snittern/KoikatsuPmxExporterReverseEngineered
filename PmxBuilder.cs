@@ -1134,7 +1134,7 @@ internal class PmxBuilder
                     pmxMorph.Kind = PmxMorph.OffsetKind.Vertex;
                     for (int index4 = 0; index4 < vector3Array4.Length; ++index4)
                     {
-                        PmxVertexMorph pmxVertexMorph = new PmxVertexMorph(num + index4, new Vector3((float)-vector3Array4[index4].x, (float)vector3Array4[index4].y, (float)-vector3Array4[index4].z));
+                        PmxVertexMorph pmxVertexMorph = new PmxVertexMorph(num + index4, new PmxLib.Vector3((float)-vector3Array4[index4].x, (float)vector3Array4[index4].y, (float)-vector3Array4[index4].z));
                         pmxVertexMorph.Offset *= (float)this.scale;
                         pmxMorph.OffsetList.Add((PmxBaseMorph)pmxVertexMorph);
                     }
@@ -1153,9 +1153,9 @@ internal class PmxBuilder
         {
             SkinnedMeshRenderer skinnedMeshRenderer = fbsTargetInfo.GetSkinnedMeshRenderer();
             int blendShapeCount = skinnedMeshRenderer.sharedMesh.blendShapeCount;
-            Vector3[] vector3Array7 = new Vector3[skinnedMeshRenderer.sharedMesh.vertices.Length];
-            Vector3[] vector3Array8 = new Vector3[skinnedMeshRenderer.sharedMesh.normals.Length];
-            Vector3[] vector3Array9 = new Vector3[skinnedMeshRenderer.sharedMesh.tangents.Length];
+            var vector3Array7 = new UnityEngine.Vector3[skinnedMeshRenderer.sharedMesh.vertices.Length];
+            var vector3Array8 = new UnityEngine.Vector3[skinnedMeshRenderer.sharedMesh.normals.Length];
+            var vector3Array9 = new UnityEngine.Vector3[skinnedMeshRenderer.sharedMesh.tangents.Length];
             int num = 0;
             for (int index = 0; index < this.vertics_num.Length && this.vertics_num[index] != vector3Array7.Length; ++index)
                 num += this.vertics_num[index];
@@ -1171,7 +1171,7 @@ internal class PmxBuilder
                     pmxMorph.Kind = PmxMorph.OffsetKind.Vertex;
                     for (int index7 = 0; index7 < vector3Array7.Length; ++index7)
                     {
-                        PmxVertexMorph pmxVertexMorph = new PmxVertexMorph(num + index7, new Vector3((float)-vector3Array7[index7].x, (float)vector3Array7[index7].y, (float)-vector3Array7[index7].z));
+                        PmxVertexMorph pmxVertexMorph = new PmxVertexMorph(num + index7, new PmxLib.Vector3((float)-vector3Array7[index7].x, (float)vector3Array7[index7].y, (float)-vector3Array7[index7].z));
                         pmxVertexMorph.Offset *= (float)this.scale;
                         pmxMorph.OffsetList.Add((PmxBaseMorph)pmxVertexMorph);
                     }
@@ -1219,11 +1219,11 @@ internal class PmxBuilder
     private void setSkinnedMeshList()
     {
         this.skinnedMeshList = new List<SkinnedMeshRenderer>();
-        SkinnedMeshRenderer[] objectsOfType = Object.FindObjectsOfType(typeof(SkinnedMeshRenderer)) as SkinnedMeshRenderer[];
+        SkinnedMeshRenderer[] objectsOfType = UnityEngine.Object.FindObjectsOfType(typeof(SkinnedMeshRenderer)) as SkinnedMeshRenderer[];
         for (int index = 0; index < objectsOfType.Length; ++index)
             this.skinnedMeshList.Add(objectsOfType[index]);
         this.meshList = new List<MeshFilter>();
-        foreach (MeshFilter meshFilter in Object.FindObjectsOfType(typeof(MeshFilter)) as MeshFilter[])
+        foreach (MeshFilter meshFilter in UnityEngine.Object.FindObjectsOfType(typeof(MeshFilter)) as MeshFilter[])
             this.meshList.Add(meshFilter);
         this.vertics_num = new int[objectsOfType.Length];
         this.vertics_name = new string[objectsOfType.Length];
@@ -1290,9 +1290,10 @@ internal class PmxBuilder
         }
     }
 
-    private Vector3 MultiplyVec3s(Vector3 v1, Vector3 v2) => new Vector3((float)(v1.x * v2.x), (float)(v1.y * v2.y), (float)(v1.z * v2.z));
+    private UnityEngine.Vector3 MultiplyVec3s(UnityEngine.Vector3 v1, UnityEngine.Vector3 v2) => new UnityEngine.Vector3((float)(v1.x * v2.x), (float)(v1.y * v2.y), (float)(v1.z * v2.z));
 
-    private Vector3 RotateAroundPoint(Vector3 point, Vector3 pivot, Quaternion angle) => Vector3.op_Addition(Quaternion.op_Multiply(angle, Vector3.op_Subtraction(point, pivot)), pivot);
+    //Vector3.op_Addition(Quaternion.op_Multiply(angle, Vector3.op_Subtraction(point, pivot)), pivot);
+    private UnityEngine.Vector3 RotateAroundPoint(UnityEngine.Vector3 point, UnityEngine.Vector3 pivot, UnityEngine.Quaternion angle) => (angle * (point - pivot)) + pivot;
 
     public void CreateMeshList()
     {
@@ -1306,10 +1307,10 @@ internal class PmxBuilder
             Mesh mesh1 = new Mesh();
             componentsInChildren[index1].BakeMesh(mesh1);
             Mesh mesh2 = mesh1;
-            Vector2[] uv = mesh2.uv;
-            Vector2[] uv2 = mesh2.uv2;
-            Vector3[] normals = mesh2.normals;
-            Vector3[] vertices = mesh2.vertices;
+            var uv = mesh2.uv;
+            var uv2 = mesh2.uv2;
+            var normals = mesh2.normals;
+            var vertices = mesh2.vertices;
             for (int index2 = 0; index2 < mesh2.subMeshCount; ++index2)
             {
                 int[] triangles = mesh2.GetTriangles(index2);
@@ -1320,19 +1321,19 @@ internal class PmxBuilder
             for (int index3 = 0; index3 < mesh2.vertexCount; ++index3)
             {
                 PmxVertex pmxVertex = new PmxVertex();
-                pmxVertex.UV = new Vector2((float)uv[index3].x, (float)(-uv[index3].y + 1.0));
+                pmxVertex.UV = new PmxLib.Vector2((float)uv[index3].x, (float)(-uv[index3].y + 1.0));
                 pmxVertex.Weight = this.ConvertBoneWeight(boneWeights[index3], componentsInChildren[index1].bones);
-                Vector3 vector3_1 = this.RotateAroundPoint(normals[index3], Vector3.zero, gameObject.transform.rotation);
-                pmxVertex.Normal = new Vector3((float)-vector3_1.x, (float)vector3_1.y, (float)-vector3_1.z);
-                Vector3 vector3_2 = Vector3.op_Addition(this.RotateAroundPoint(vertices[index3], Vector3.zero, gameObject.transform.rotation), gameObject.transform.position);
-                pmxVertex.Position = new Vector3((float)-vector3_2.x * (float)this.scale, (float)vector3_2.y * (float)this.scale, (float)-vector3_2.z * (float)this.scale);
+                var vector3_1 = this.RotateAroundPoint(normals[index3], UnityEngine.Vector3.zero, gameObject.transform.rotation);
+                pmxVertex.Normal = new PmxLib.Vector3((float)-vector3_1.x, (float)vector3_1.y, (float)-vector3_1.z);
+                var vector3_2 = this.RotateAroundPoint(vertices[index3], UnityEngine.Vector3.zero, gameObject.transform.rotation) + gameObject.transform.position;
+                pmxVertex.Position = new PmxLib.Vector3((float)-vector3_2.x * (float)this.scale, (float)vector3_2.y * (float)this.scale, (float)-vector3_2.z * (float)this.scale);
                 pmxVertex.Deform = PmxVertex.DeformType.BDEF4;
                 this.pmxFile.VertexList.Add(pmxVertex);
             }
         }
     }
 
-    private Vector3 TransToParent(Vector3 v, int index)
+    private UnityEngine.Vector3 TransToParent(UnityEngine.Vector3 v, int index)
     {
         Transform bone = this.boneList[index];
         int index1 = -1;
@@ -1351,7 +1352,7 @@ internal class PmxBuilder
         return v;
     }
 
-    private Vector3 CalcPostion(Vector3 v, BoneWeight boneWeight, Transform[] bones)
+    private UnityEngine.Vector3 CalcPostion(UnityEngine.Vector3 v, BoneWeight boneWeight, Transform[] bones)
     {
         Transform bone = bones[((BoneWeight)ref boneWeight).boneIndex0];
         if (this.bonesMap.ContainsKey(bone))
@@ -1368,7 +1369,7 @@ internal class PmxBuilder
         pmxMaterial.Name = (material).name;
         pmxMaterial.NameE = (material).name;
         pmxMaterial.Flags = PmxMaterial.MaterialFlags.DrawBoth | PmxMaterial.MaterialFlags.Shadow | PmxMaterial.MaterialFlags.SelfShadowMap | PmxMaterial.MaterialFlags.SelfShadow;
-        if (Object.op_Inequality(material.mainTexture, null))
+        if (material.mainTexture != null)
         {
             string str = (material).name;
             if (str.Contains("Instance"))
@@ -1382,7 +1383,7 @@ internal class PmxBuilder
         if (material.HasProperty("_AmbColor"))
             pmxMaterial.Ambient = material.GetColor("_AmbColor");
         if (material.HasProperty("_Opacity"))
-            pmxMaterial.Diffuse.a = (__Null)(double)material.GetFloat("_Opacity");
+            pmxMaterial.Diffuse.a = (float)material.GetFloat("_Opacity");
         if (material.HasProperty("_SpecularColor"))
             pmxMaterial.Specular = material.GetColor("_SpecularColor");
         if (!material.HasProperty("_Shininess"))
@@ -1406,8 +1407,9 @@ internal class PmxBuilder
             PmxBone pmxBone = new PmxBone();
             pmxBone.Name = (componentsInChildren[index]).name;
             pmxBone.Parent = transformList.IndexOf(componentsInChildren[index].parent);
-            Vector3 vector3 = Vector3.op_Multiply(((Component)componentsInChildren[index]).transform.position, (float)this.scale);
-            pmxBone.Position = new Vector3((float)-vector3.x, (float)vector3.y, (float)-vector3.z);
+            //var vector3 = Vector3.op_Multiply(((Component)componentsInChildren[index]).transform.position, (float)this.scale);
+            var vector3 = ((Component)componentsInChildren[index]).transform.position * this.scale;
+            pmxBone.Position = new PmxLib.Vector3((float)-vector3.x, (float)vector3.y, (float)-vector3.z);
             transformList.Add(componentsInChildren[index]);
             this.pmxFile.BoneList.Add(pmxBone);
         }
@@ -1537,7 +1539,7 @@ internal class PmxBuilder
         this.insertbone(1, new PmxBone()
         {
             Name = "センター",
-            Position = new Vector3(0.0f, this.sb("下半身").Position.Y * 0.75f, 0.0f),
+            Position = new PmxLib.Vector3(0.0f, this.sb("下半身").Position.Y * 0.75f, 0.0f),
             Flags = PmxBone.BoneFlags.Rotation | PmxBone.BoneFlags.Translation | PmxBone.BoneFlags.Visible
         });
         this.sb("BodyTop").Parent = this.sbi("センター");
@@ -1584,7 +1586,7 @@ internal class PmxBuilder
             pmxBone1.Parent = this.sbi("左足首");
             PmxBone pmxBone2 = this.sb("左足ＩＫ");
             pmxBone2.Position = this.sb("左足首").Position;
-            pmxBone2.To_Offset = new Vector3(0.0f, -1.3f, 0.0f);
+            pmxBone2.To_Offset = new PmxLib.Vector3(0.0f, -1.3f, 0.0f);
             pmxBone2.Parent = this.sbi("全ての親");
             pmxBone2.Flags = PmxBone.BoneFlags.Translation | PmxBone.BoneFlags.Visible | PmxBone.BoneFlags.Enable | PmxBone.BoneFlags.IK;
             pmxBone2.IK.Angle = 2f;
@@ -1594,8 +1596,8 @@ internal class PmxBuilder
             {
                 Bone = this.sbi("左ひざ"),
                 IsLimit = true,
-                High = new Vector3(-1f * (float)Math.PI / 360f, 0.0f, 0.0f),
-                Low = new Vector3(-3.141593f, 0.0f, 0.0f)
+                High = new PmxLib.Vector3(-1f * (float)Math.PI / 360f, 0.0f, 0.0f),
+                Low = new PmxLib.Vector3(-3.141593f, 0.0f, 0.0f)
             });
             pmxBone2.IK.LinkList.Add(new PmxIK.IKLink()
             {
@@ -1603,7 +1605,7 @@ internal class PmxBuilder
             });
             PmxBone pmxBone3 = this.sb("左つま先ＩＫ");
             pmxBone3.Position = this.sb("左つま先").Position;
-            pmxBone3.To_Offset = new Vector3(0.0f, -1.3081f, 0.0f);
+            pmxBone3.To_Offset = new PmxLib.Vector3(0.0f, -1.3081f, 0.0f);
             pmxBone3.Parent = this.sbi("左足ＩＫ");
             pmxBone3.Flags = PmxBone.BoneFlags.Translation | PmxBone.BoneFlags.Visible | PmxBone.BoneFlags.Enable | PmxBone.BoneFlags.IK;
             pmxBone3.IK.Angle = 4f;
@@ -1620,7 +1622,7 @@ internal class PmxBuilder
             pmxBone4.Parent = this.sbi("右足首");
             PmxBone pmxBone5 = this.sb("右足ＩＫ");
             pmxBone5.Position = this.sb("右足首").Position;
-            pmxBone5.To_Offset = new Vector3(0.0f, -1.3f, 0.0f);
+            pmxBone5.To_Offset = new PmxLib.Vector3(0.0f, -1.3f, 0.0f);
             pmxBone5.Parent = this.sbi("全ての親");
             pmxBone5.Flags = PmxBone.BoneFlags.Translation | PmxBone.BoneFlags.Visible | PmxBone.BoneFlags.Enable | PmxBone.BoneFlags.IK;
             pmxBone5.IK.Angle = 2f;
@@ -1630,8 +1632,8 @@ internal class PmxBuilder
             {
                 Bone = this.sbi("右ひざ"),
                 IsLimit = true,
-                High = new Vector3(-1f * (float)Math.PI / 360f, 0.0f, 0.0f),
-                Low = new Vector3(-3.141593f, 0.0f, 0.0f)
+                High = new PmxLib.Vector3(-1f * (float)Math.PI / 360f, 0.0f, 0.0f),
+                Low = new PmxLib.Vector3(-3.141593f, 0.0f, 0.0f)
             });
             pmxBone5.IK.LinkList.Add(new PmxIK.IKLink()
             {
@@ -1639,7 +1641,7 @@ internal class PmxBuilder
             });
             PmxBone pmxBone6 = this.sb("右つま先ＩＫ");
             pmxBone6.Position = this.sb("右つま先").Position;
-            pmxBone6.To_Offset = new Vector3(0.0f, -1.3081f, 0.0f);
+            pmxBone6.To_Offset = new PmxLib.Vector3(0.0f, -1.3081f, 0.0f);
             pmxBone6.Parent = this.sbi("右足ＩＫ");
             pmxBone6.Flags = PmxBone.BoneFlags.Translation | PmxBone.BoneFlags.Visible | PmxBone.BoneFlags.Enable | PmxBone.BoneFlags.IK;
             pmxBone6.IK.Angle = 4f;
@@ -1653,8 +1655,8 @@ internal class PmxBuilder
         if (this.sb("頭") == null)
             return;
         PmxBone pmxBone = this.sb("両目x");
-        pmxBone.Position = new Vector3(0.0f, this.sb("頭").Position.Y + 3f, 0.0f);
-        pmxBone.To_Offset = new Vector3(0.0f, 0.0f, -1f);
+        pmxBone.Position = new PmxLib.Vector3(0.0f, this.sb("頭").Position.Y + 3f, 0.0f);
+        pmxBone.To_Offset = new PmxLib.Vector3(0.0f, 0.0f, -1f);
         pmxBone.Parent = this.sbi("頭");
     }
 
@@ -1791,9 +1793,8 @@ internal class PmxBuilder
             if (pmxBoneList1[index1].Parent != -1)
             {
                 PmxBone bone = this.pmxFile.BoneList[pmxBoneList1[index1].Parent];
-                Vector3 vector3_1 = new Vector3();
                 int index2 = this.serchchild(pmxBoneList1[index1].Name);
-                Vector3 vector3_2 = index2 == -1 ? new Vector3(0.0f, -0.5f, 0.0f) + pmxBoneList1[index1].Position : this.pmxFile.BoneList[index2].Position;
+                PmxLib.Vector3 vector3_2 = index2 == -1 ? new PmxLib.Vector3(0.0f, -0.5f, 0.0f) + pmxBoneList1[index1].Position : this.pmxFile.BoneList[index2].Position;
                 PmxBody pmxBody = new PmxBody();
                 pmxBody.Name = pmxBoneList1[index1].Name;
                 pmxBody.Bone = this.sbi(pmxBoneList1[index1].Name);
@@ -1809,7 +1810,7 @@ internal class PmxBuilder
                 pmxBody.Mode = PmxBody.ModeType.Dynamic;
                 if (bone.Name.Equals("cf_J_hairF_top") || bone.Name.Equals("cf_J_hairB_top"))
                     pmxBody.Mode = PmxBody.ModeType.Static;
-                pmxBody.BoxSize = new Vector3(0.2f, this.getDistance(pmxBoneList1[index1].Position, vector3_2) / 2f, 0.0f);
+                pmxBody.BoxSize = new PmxLib.Vector3(0.2f, this.getDistance(pmxBoneList1[index1].Position, vector3_2) / 2f, 0.0f);
                 pmxBody.Rotation = this.getDirection(pmxBoneList1[index1].Position, vector3_2);
                 this.pmxFile.BodyList.Add(pmxBody);
                 if (this.sbdi(bone.Name) == -1)
@@ -1822,8 +1823,8 @@ internal class PmxBuilder
                         Rotation = pmxBody.Rotation,
                         BodyA = this.sbdi(bone.Name),
                         BodyB = this.sbdi(pmxBody.Name),
-                        Limit_AngleLow = new Vector3(-0.1745329f, -1f * (float)Math.PI / 36f, -0.1745329f),
-                        Limit_AngleHigh = new Vector3(0.1745329f, (float)Math.PI / 36f, 0.1745329f)
+                        Limit_AngleLow = new PmxLib.Vector3(-0.1745329f, -1f * (float)Math.PI / 36f, -0.1745329f),
+                        Limit_AngleHigh = new PmxLib.Vector3(0.1745329f, (float)Math.PI / 36f, 0.1745329f)
                     });
             }
         }
@@ -1831,18 +1832,16 @@ internal class PmxBuilder
         PmxBody pmxBody1 = new PmxBody();
         pmxBody1.Name = pmxBone1.Name;
         pmxBody1.Bone = this.sbi(pmxBone1.Name);
-        pmxBody1.Position = new Vector3(0.0f, this.sb("下半身").Position.y, 0.6f);
-        Quaternion.Euler(0.0f, 0.0f, 1.570796f);
-        pmxBody1.Rotation = new Vector3(0.0f, 0.0f, 1.570796f);
+        pmxBody1.Position = new PmxLib.Vector3(0.0f, this.sb("下半身").Position.y, 0.6f);
+        pmxBody1.Rotation = new PmxLib.Vector3(0.0f, 0.0f, 1.570796f);
         pmxBody1.BoxType = PmxBody.BoxKind.Capsule;
-        pmxBody1.BoxSize = new Vector3(1f, 1.3f, 0.0f);
+        pmxBody1.BoxSize = new PmxLib.Vector3(1f, 1.3f, 0.0f);
         this.pmxFile.BodyList.Add(pmxBody1);
         for (int index3 = 0; index3 < pmxBoneList2.Count; ++index3)
         {
             PmxBone bone = this.pmxFile.BoneList[pmxBoneList2[index3].Parent];
-            Vector3 vector3_3 = new Vector3();
             int index4 = this.serchchild(pmxBoneList2[index3].Name);
-            Vector3 vector3_4 = index4 == -1 ? new Vector3(0.0f, -0.5f, 0.0f) + pmxBoneList2[index3].Position : this.pmxFile.BoneList[index4].Position;
+            PmxLib.Vector3 vector3_4 = index4 == -1 ? new PmxLib.Vector3(0.0f, -0.5f, 0.0f) + pmxBoneList2[index3].Position : this.pmxFile.BoneList[index4].Position;
             PmxBody pmxBody2 = new PmxBody();
             pmxBody2.Name = pmxBoneList2[index3].Name;
             pmxBody2.Bone = this.sbi(pmxBoneList2[index3].Name);
@@ -1858,7 +1857,7 @@ internal class PmxBuilder
             pmxBody2.Mode = PmxBody.ModeType.Dynamic;
             if (bone.Name == "cf_s_waist01" || bone.Name == "下半身" || bone.Name.Contains("cf_d_sk"))
                 pmxBody2.Mode = PmxBody.ModeType.Static;
-            pmxBody2.BoxSize = new Vector3(0.2f, this.getDistance(pmxBoneList2[index3].Position, vector3_4) / 2f, 0.0f);
+            pmxBody2.BoxSize = new PmxLib.Vector3(0.2f, this.getDistance(pmxBoneList2[index3].Position, vector3_4) / 2f, 0.0f);
             pmxBody2.Rotation = this.getDirection(pmxBoneList2[index3].Position, vector3_4);
             this.pmxFile.BodyList.Add(pmxBody2);
             if (!(bone.Name == "cf_s_waist01") && !(bone.Name == "下半身") && !bone.Name.Contains("cf_d_sk"))
@@ -1869,8 +1868,8 @@ internal class PmxBuilder
                     Rotation = pmxBody2.Rotation,
                     BodyA = this.sbdi(bone.Name),
                     BodyB = this.sbdi(pmxBody2.Name),
-                    Limit_AngleLow = new Vector3(-0.5235988f, -0.2617994f, -0.5235988f),
-                    Limit_AngleHigh = new Vector3(0.5235988f, 0.2617994f, 0.5235988f)
+                    Limit_AngleLow = new PmxLib.Vector3(-0.5235988f, -0.2617994f, -0.5235988f),
+                    Limit_AngleHigh = new PmxLib.Vector3(0.5235988f, 0.2617994f, 0.5235988f)
                 });
         }
         int num1 = 0;
@@ -1910,10 +1909,10 @@ internal class PmxBuilder
                     Rotation = this.pmxFile.BodyList[this.sbdi(pmxBoneList2[index5].Name)].Rotation,
                     BodyA = this.sbdi(pmxBoneList2[index5].Name),
                     BodyB = this.sbdi(pmxBone2.Name),
-                    Limit_MoveLow = new Vector3(0.0f, 0.0f, 0.0f),
-                    Limit_MoveHigh = new Vector3(0.0f, 0.0f, 0.0f),
-                    Limit_AngleLow = new Vector3(-0.5235988f, -0.2617994f, -0.5235988f),
-                    Limit_AngleHigh = new Vector3(0.5235988f, 0.2617994f, 0.5235988f)
+                    Limit_MoveLow = new PmxLib.Vector3(0.0f, 0.0f, 0.0f),
+                    Limit_MoveHigh = new PmxLib.Vector3(0.0f, 0.0f, 0.0f),
+                    Limit_AngleLow = new PmxLib.Vector3(-0.5235988f, -0.2617994f, -0.5235988f),
+                    Limit_AngleHigh = new PmxLib.Vector3(0.5235988f, 0.2617994f, 0.5235988f)
                 });
         }
         PmxBone pmxBone3 = this.sb("右足");
@@ -1924,7 +1923,7 @@ internal class PmxBuilder
             Bone = this.sbi(pmxBone3.Name),
             Position = pmxBone3.To_Bone == -1 ? pmxBone3.Position + pmxBone3.To_Offset / 2f : (pmxBone3.Position + this.pmxFile.BoneList[pmxBone3.To_Bone].Position) / 2f,
             BoxType = PmxBody.BoxKind.Capsule,
-            BoxSize = new Vector3(0.8f, (float)((double)this.getDistance(this.pmxFile.BoneList[pmxBone3.To_Bone].Position, pmxBone3.Position) / 2.0 * 1.5), 0.0f),
+            BoxSize = new PmxLib.Vector3(0.8f, (float)((double)this.getDistance(this.pmxFile.BoneList[pmxBone3.To_Bone].Position, pmxBone3.Position) / 2.0 * 1.5), 0.0f),
             Rotation = this.getDirection(this.pmxFile.BoneList[pmxBone3.To_Bone].Position, pmxBone3.Position)
         });
         PmxBone pmxBone4 = this.sb("左足");
@@ -1935,7 +1934,7 @@ internal class PmxBuilder
             Bone = this.sbi(pmxBone4.Name),
             Position = pmxBone4.To_Bone == -1 ? pmxBone4.Position + pmxBone4.To_Offset / 2f : (pmxBone4.Position + this.pmxFile.BoneList[pmxBone4.To_Bone].Position) / 2f,
             BoxType = PmxBody.BoxKind.Capsule,
-            BoxSize = new Vector3(0.8f, (float)((double)this.getDistance(this.pmxFile.BoneList[pmxBone4.To_Bone].Position, pmxBone4.Position) / 2.0 * 1.5), 0.0f),
+            BoxSize = new PmxLib.Vector3(0.8f, (float)((double)this.getDistance(this.pmxFile.BoneList[pmxBone4.To_Bone].Position, pmxBone4.Position) / 2.0 * 1.5), 0.0f),
             Rotation = this.getDirection(this.pmxFile.BoneList[pmxBone4.To_Bone].Position, pmxBone4.Position)
         });
     }
@@ -1960,16 +1959,16 @@ internal class PmxBuilder
         return -1;
     }
 
-    private Vector3 getDirection(Vector3 first, Vector3 last)
+    private PmxLib.Vector3 getDirection(PmxLib.Vector3 first, PmxLib.Vector3 last)
     {
-        Vector3 vector3 = new Vector3();
+        PmxLib.Vector3 vector3 = new PmxLib.Vector3();
         float num = (float)Math.Sqrt(((double)last.X - (double)first.X) * ((double)last.X - (double)first.X) + ((double)last.Z - (double)first.Z) * ((double)last.Z - (double)first.Z));
         vector3.X = (float)(Math.Atan2((double)last.Y - (double)first.Y, (double)num) + Math.PI / 2.0);
         vector3.Y = -(float)(Math.Atan2((double)last.Z - (double)first.Z, (double)last.X - (double)first.X) + Math.PI / 2.0);
         return vector3;
     }
 
-    private float getDistance(Vector3 one, Vector3 two) => (float)Math.Sqrt(((double)one.X - (double)two.X) * ((double)one.X - (double)two.X) + ((double)one.Y - (double)two.Y) * ((double)one.Y - (double)two.Y) + ((double)one.Z - (double)two.Z) * ((double)one.Z - (double)two.Z));
+    private float getDistance(PmxLib.Vector3 one, PmxLib.Vector3 two) => (float)Math.Sqrt(((double)one.X - (double)two.X) * ((double)one.X - (double)two.X) + ((double)one.Y - (double)two.Y) * ((double)one.Y - (double)two.Y) + ((double)one.Z - (double)two.Z) * ((double)one.Z - (double)two.Z));
 
     private void addAccessory()
     {
@@ -1979,10 +1978,10 @@ internal class PmxBuilder
             GameObject gameObject = ((Component)componentsInChildren[index1]).gameObject;
             Mesh sharedMesh = componentsInChildren[index1].sharedMesh;
             BoneWeight[] boneWeights = sharedMesh.boneWeights;
-            Vector2[] uv = sharedMesh.uv;
-            Vector2[] uv2 = sharedMesh.uv2;
-            Vector3[] normals = sharedMesh.normals;
-            Vector3[] vertices = sharedMesh.vertices;
+            var uv = sharedMesh.uv;
+            var uv2 = sharedMesh.uv2;
+            var normals = sharedMesh.normals;
+            var vertices = sharedMesh.vertices;
             for (int index2 = 0; index2 < sharedMesh.subMeshCount; ++index2)
             {
                 int[] triangles = sharedMesh.GetTriangles(index2);
@@ -1993,20 +1992,22 @@ internal class PmxBuilder
             PmxBone pmxBone = new PmxBone();
             pmxBone.Name = (componentsInChildren[index1]).name;
             pmxBone.Parent = this.sbi((componentsInChildren[index1]).name);
-            Vector3 vector3_1 = Vector3.op_Multiply(((Component)componentsInChildren[index1]).transform.position, (float)this.scale);
-            pmxBone.Position = new Vector3((float)-vector3_1.x, (float)vector3_1.y, (float)-vector3_1.z);
+            //var vector3_1 = Vector3.op_Multiply(((Component)componentsInChildren[index1]).transform.position, (float)this.scale);
+            var vector3_1 = ((Component)componentsInChildren[index1]).transform.position * this.scale;
+            pmxBone.Position = new PmxLib.Vector3((float)-vector3_1.x, (float)vector3_1.y, (float)-vector3_1.z);
             this.pmxFile.BoneList.Add(pmxBone);
             for (int index3 = 0; index3 < sharedMesh.vertexCount; ++index3)
             {
                 PmxVertex pmxVertex = new PmxVertex();
-                pmxVertex.UV = new Vector2((float)uv[index3].x, (float)(-uv[index3].y + 1.0));
+                pmxVertex.UV = new PmxLib.Vector2((float)uv[index3].x, (float)(-uv[index3].y + 1.0));
                 pmxVertex.Weight = new PmxVertex.BoneWeight[4];
                 pmxVertex.Weight[0].Bone = this.pmxFile.BoneList.Count - 1;
                 pmxVertex.Weight[0].Value = 1f;
-                Vector3 vector3_2 = this.RotateAroundPoint(normals[index3], Vector3.zero, gameObject.transform.rotation);
-                pmxVertex.Normal = new Vector3((float)-vector3_2.x, (float)vector3_2.y, (float)-vector3_2.z);
-                Vector3 vector3_3 = Vector3.op_Addition(this.RotateAroundPoint(this.MultiplyVec3s(vertices[index3], gameObject.transform.lossyScale), Vector3.zero, gameObject.transform.rotation), gameObject.transform.position);
-                pmxVertex.Position = new Vector3((float)-vector3_3.x * (float)this.scale, (float)vector3_3.y * (float)this.scale, (float)-vector3_3.z * (float)this.scale);
+                var vector3_2 = this.RotateAroundPoint(normals[index3], UnityEngine.Vector3.zero, gameObject.transform.rotation);
+                pmxVertex.Normal = new PmxLib.Vector3((float)-vector3_2.x, (float)vector3_2.y, (float)-vector3_2.z);
+                //var vector3_3 = Vector3.op_Addition(this.RotateAroundPoint(this.MultiplyVec3s(vertices[index3], gameObject.transform.lossyScale), Vector3.zero, gameObject.transform.rotation), gameObject.transform.position);
+                var vector3_3 = this.RotateAroundPoint(this.MultiplyVec3s(vertices[index3], gameObject.transform.lossyScale), UnityEngine.Vector3.zero, gameObject.transform.rotation) + gameObject.transform.position;
+                pmxVertex.Position = new PmxLib.Vector3((float)-vector3_3.x * (float)this.scale, (float)vector3_3.y * (float)this.scale, (float)-vector3_3.z * (float)this.scale);
                 pmxVertex.Deform = PmxVertex.DeformType.BDEF4;
                 this.pmxFile.VertexList.Add(pmxVertex);
             }
@@ -2032,7 +2033,7 @@ internal class PmxBuilder
         pmxBodyPassGroup1.Flags[13] = true;
         pmxBody1.PassGroup = pmxBodyPassGroup1;
         pmxBody1.Mode = PmxBody.ModeType.Static;
-        pmxBody1.BoxSize = new Vector3(0.1f, 0.1f, 0.1f);
+        pmxBody1.BoxSize = new PmxLib.Vector3(0.1f, 0.1f, 0.1f);
         this.pmxFile.BodyList.Add(pmxBody1);
         PmxBody pmxBody2 = new PmxBody();
         pmxBody2.Name = "左AH1";
@@ -2051,7 +2052,7 @@ internal class PmxBuilder
         pmxBodyPassGroup2.Flags[13] = true;
         pmxBody2.PassGroup = pmxBodyPassGroup2;
         pmxBody2.Mode = PmxBody.ModeType.Dynamic;
-        pmxBody2.BoxSize = new Vector3(0.3f, 0.0f, 0.0f);
+        pmxBody2.BoxSize = new PmxLib.Vector3(0.3f, 0.0f, 0.0f);
         this.pmxFile.BodyList.Add(pmxBody2);
         PmxBody pmxBody3 = new PmxBody();
         pmxBody3.Name = "左AH2";
@@ -2070,7 +2071,7 @@ internal class PmxBuilder
         pmxBodyPassGroup3.Flags[13] = true;
         pmxBody3.PassGroup = pmxBodyPassGroup3;
         pmxBody3.Mode = PmxBody.ModeType.Dynamic;
-        pmxBody3.BoxSize = new Vector3(0.3f, 0.0f, 0.0f);
+        pmxBody3.BoxSize = new PmxLib.Vector3(0.3f, 0.0f, 0.0f);
         this.pmxFile.BodyList.Add(pmxBody3);
         PmxBody pmxBody4 = new PmxBody();
         pmxBody4.Name = "左胸操作接続";
@@ -2089,13 +2090,13 @@ internal class PmxBuilder
         pmxBodyPassGroup4.Flags[13] = true;
         pmxBody4.PassGroup = pmxBodyPassGroup4;
         pmxBody4.Mode = PmxBody.ModeType.Dynamic;
-        pmxBody4.BoxSize = new Vector3(0.1f, 1.515f, 0.0f);
-        pmxBody4.Rotation = new Vector3(0.0f, 1.570796f, -1.570796f);
+        pmxBody4.BoxSize = new PmxLib.Vector3(0.1f, 1.515f, 0.0f);
+        pmxBody4.Rotation = new PmxLib.Vector3(0.0f, 1.570796f, -1.570796f);
         this.pmxFile.BodyList.Add(pmxBody4);
         PmxBody pmxBody5 = new PmxBody();
         pmxBody5.Name = "左胸操作衝突";
         pmxBody5.Bone = -1;
-        pmxBody5.Position = new Vector3(this.sb("左胸操作").Position.X, this.sb("左胸操作").Position.Y, this.sb("左胸操作").Position.Z - 0.12f);
+        pmxBody5.Position = new PmxLib.Vector3(this.sb("左胸操作").Position.X, this.sb("左胸操作").Position.Y, this.sb("左胸操作").Position.Z - 0.12f);
         pmxBody5.BoxType = PmxBody.BoxKind.Sphere;
         pmxBody5.Group = 7;
         pmxBody5.Mass = 0.1f;
@@ -2106,7 +2107,7 @@ internal class PmxBuilder
         pmxBodyPassGroup5.Flags[13] = true;
         pmxBody5.PassGroup = pmxBodyPassGroup5;
         pmxBody5.Mode = PmxBody.ModeType.Dynamic;
-        pmxBody5.BoxSize = new Vector3(0.4f, 0.0f, 0.0f);
+        pmxBody5.BoxSize = new PmxLib.Vector3(0.4f, 0.0f, 0.0f);
         this.pmxFile.BodyList.Add(pmxBody5);
         PmxBody pmxBody6 = new PmxBody();
         pmxBody6.Name = "右胸操作";
@@ -2125,7 +2126,7 @@ internal class PmxBuilder
         pmxBodyPassGroup6.Flags[13] = true;
         pmxBody6.PassGroup = pmxBodyPassGroup6;
         pmxBody6.Mode = PmxBody.ModeType.Static;
-        pmxBody6.BoxSize = new Vector3(0.1f, 0.1f, 0.1f);
+        pmxBody6.BoxSize = new PmxLib.Vector3(0.1f, 0.1f, 0.1f);
         this.pmxFile.BodyList.Add(pmxBody6);
         PmxBody pmxBody7 = new PmxBody();
         pmxBody7.Name = "右AH1";
@@ -2144,7 +2145,7 @@ internal class PmxBuilder
         pmxBodyPassGroup7.Flags[13] = true;
         pmxBody7.PassGroup = pmxBodyPassGroup7;
         pmxBody7.Mode = PmxBody.ModeType.Dynamic;
-        pmxBody7.BoxSize = new Vector3(0.3f, 0.0f, 0.0f);
+        pmxBody7.BoxSize = new PmxLib.Vector3(0.3f, 0.0f, 0.0f);
         this.pmxFile.BodyList.Add(pmxBody7);
         PmxBody pmxBody8 = new PmxBody();
         pmxBody8.Name = "右AH2";
@@ -2163,7 +2164,7 @@ internal class PmxBuilder
         pmxBodyPassGroup8.Flags[13] = true;
         pmxBody8.PassGroup = pmxBodyPassGroup8;
         pmxBody8.Mode = PmxBody.ModeType.Dynamic;
-        pmxBody8.BoxSize = new Vector3(0.3f, 0.0f, 0.0f);
+        pmxBody8.BoxSize = new PmxLib.Vector3(0.3f, 0.0f, 0.0f);
         this.pmxFile.BodyList.Add(pmxBody8);
         PmxBody pmxBody9 = new PmxBody();
         pmxBody9.Name = "右胸操作接続";
@@ -2182,13 +2183,13 @@ internal class PmxBuilder
         pmxBodyPassGroup9.Flags[13] = true;
         pmxBody9.PassGroup = pmxBodyPassGroup9;
         pmxBody9.Mode = PmxBody.ModeType.Dynamic;
-        pmxBody9.BoxSize = new Vector3(0.1f, 1.515f, 0.0f);
-        pmxBody9.Rotation = new Vector3(0.0f, 1.570796f, -1.570796f);
+        pmxBody9.BoxSize = new PmxLib.Vector3(0.1f, 1.515f, 0.0f);
+        pmxBody9.Rotation = new PmxLib.Vector3(0.0f, 1.570796f, -1.570796f);
         this.pmxFile.BodyList.Add(pmxBody9);
         PmxBody pmxBody10 = new PmxBody();
         pmxBody10.Name = "右胸操作衝突";
         pmxBody10.Bone = -1;
-        pmxBody10.Position = new Vector3(this.sb("右胸操作").Position.X, this.sb("右胸操作").Position.Y, this.sb("右胸操作").Position.Z - 0.12f);
+        pmxBody10.Position = new PmxLib.Vector3(this.sb("右胸操作").Position.X, this.sb("右胸操作").Position.Y, this.sb("右胸操作").Position.Z - 0.12f);
         pmxBody10.BoxType = PmxBody.BoxKind.Sphere;
         pmxBody10.Group = 7;
         pmxBody10.Mass = 0.1f;
@@ -2199,7 +2200,7 @@ internal class PmxBuilder
         pmxBodyPassGroup10.Flags[13] = true;
         pmxBody10.PassGroup = pmxBodyPassGroup10;
         pmxBody10.Mode = PmxBody.ModeType.Dynamic;
-        pmxBody10.BoxSize = new Vector3(0.4f, 0.0f, 0.0f);
+        pmxBody10.BoxSize = new PmxLib.Vector3(0.4f, 0.0f, 0.0f);
         this.pmxFile.BodyList.Add(pmxBody10);
         PmxJoint pmxJoint = new PmxJoint();
         pmxJoint.Name = "左胸操作着衣用";
@@ -2207,10 +2208,10 @@ internal class PmxBuilder
         pmxJoint.BodyA = this.sbdi("左AH2");
         pmxJoint.BodyB = this.sbdi("右AH2");
         this.pmxFile.JointList.Add(pmxJoint);
-        pmxJoint.Limit_MoveLow = new Vector3(0.0f, 0.0f, 0.0f);
-        pmxJoint.Limit_MoveHigh = new Vector3(0.0f, 0.0f, 0.0f);
-        pmxJoint.Limit_AngleLow = new Vector3(0.0f, 0.0f, 0.0f);
-        pmxJoint.Limit_AngleHigh = new Vector3(0.0f, 0.0f, 0.0f);
+        pmxJoint.Limit_MoveLow = new PmxLib.Vector3(0.0f, 0.0f, 0.0f);
+        pmxJoint.Limit_MoveHigh = new PmxLib.Vector3(0.0f, 0.0f, 0.0f);
+        pmxJoint.Limit_AngleLow = new PmxLib.Vector3(0.0f, 0.0f, 0.0f);
+        pmxJoint.Limit_AngleHigh = new PmxLib.Vector3(0.0f, 0.0f, 0.0f);
         this.pmxFile.JointList.Add(new PmxJoint()
         {
             Name = "左胸操作着衣用-",
@@ -2224,16 +2225,16 @@ internal class PmxBuilder
             Position = this.sb("左胸操作").Position,
             BodyA = this.sbdi("左胸操作"),
             BodyB = this.sbdi("左胸操作接続"),
-            Limit_MoveHigh = new Vector3(0.0f, 0.3f, 0.0f),
-            Limit_AngleLow = new Vector3(-0.8726646f, -0.8726646f, -0.8726646f),
-            Limit_AngleHigh = new Vector3(0.8726646f, 0.8726646f, 0.8726646f),
-            SpConst_Move = new Vector3(0.0f, 20f, 0.0f),
-            SpConst_Rotate = new Vector3(100f, 100f, 100f)
+            Limit_MoveHigh = new PmxLib.Vector3(0.0f, 0.3f, 0.0f),
+            Limit_AngleLow = new PmxLib.Vector3(-0.8726646f, -0.8726646f, -0.8726646f),
+            Limit_AngleHigh = new PmxLib.Vector3(0.8726646f, 0.8726646f, 0.8726646f),
+            SpConst_Move = new PmxLib.Vector3(0.0f, 20f, 0.0f),
+            SpConst_Rotate = new PmxLib.Vector3(100f, 100f, 100f)
         });
         this.pmxFile.JointList.Add(new PmxJoint()
         {
             Name = "左胸操作接続",
-            Position = new Vector3(this.sb("左胸操作").Position.X, this.sb("左胸操作").Position.Y, this.sb("左胸操作").Position.Z - 0.12f),
+            Position = new PmxLib.Vector3(this.sb("左胸操作").Position.X, this.sb("左胸操作").Position.Y, this.sb("左胸操作").Position.Z - 0.12f),
             BodyA = this.sbdi("左胸操作接続"),
             BodyB = this.sbdi("左胸操作衝突")
         });
@@ -2254,7 +2255,7 @@ internal class PmxBuilder
         this.pmxFile.JointList.Add(new PmxJoint()
         {
             Name = "左胸操作接続",
-            Position = new Vector3(this.sb("左胸操作").Position.X, this.sb("左胸操作").Position.Y, this.sb("左胸操作").Position.Z - 0.12f),
+            Position = new PmxLib.Vector3(this.sb("左胸操作").Position.X, this.sb("左胸操作").Position.Y, this.sb("左胸操作").Position.Z - 0.12f),
             BodyB = this.sbdi("左胸操作接続"),
             BodyA = this.sbdi("左胸操作衝突")
         });
@@ -2278,16 +2279,16 @@ internal class PmxBuilder
             Position = this.sb("右胸操作").Position,
             BodyA = this.sbdi("右胸操作"),
             BodyB = this.sbdi("右胸操作接続"),
-            Limit_MoveHigh = new Vector3(0.0f, 0.3f, 0.0f),
-            Limit_AngleLow = new Vector3(-0.8726646f, -0.8726646f, -0.8726646f),
-            Limit_AngleHigh = new Vector3(0.8726646f, 0.8726646f, 0.8726646f),
-            SpConst_Move = new Vector3(0.0f, 20f, 0.0f),
-            SpConst_Rotate = new Vector3(100f, 100f, 100f)
+            Limit_MoveHigh = new PmxLib.Vector3(0.0f, 0.3f, 0.0f),
+            Limit_AngleLow = new PmxLib.Vector3(-0.8726646f, -0.8726646f, -0.8726646f),
+            Limit_AngleHigh = new PmxLib.Vector3(0.8726646f, 0.8726646f, 0.8726646f),
+            SpConst_Move = new PmxLib.Vector3(0.0f, 20f, 0.0f),
+            SpConst_Rotate = new PmxLib.Vector3(100f, 100f, 100f)
         });
         this.pmxFile.JointList.Add(new PmxJoint()
         {
             Name = "右胸操作接続",
-            Position = new Vector3(this.sb("右胸操作").Position.X, this.sb("右胸操作").Position.Y, this.sb("右胸操作").Position.Z - 0.12f),
+            Position = new PmxLib.Vector3(this.sb("右胸操作").Position.X, this.sb("右胸操作").Position.Y, this.sb("右胸操作").Position.Z - 0.12f),
             BodyA = this.sbdi("右胸操作接続"),
             BodyB = this.sbdi("右胸操作衝突")
         });
@@ -2308,7 +2309,7 @@ internal class PmxBuilder
         this.pmxFile.JointList.Add(new PmxJoint()
         {
             Name = "右胸操作接続",
-            Position = new Vector3(this.sb("右胸操作").Position.X, this.sb("右胸操作").Position.Y, this.sb("右胸操作").Position.Z - 0.12f),
+            Position = new PmxLib.Vector3(this.sb("右胸操作").Position.X, this.sb("右胸操作").Position.Y, this.sb("右胸操作").Position.Z - 0.12f),
             BodyB = this.sbdi("右胸操作接続"),
             BodyA = this.sbdi("右胸操作衝突")
         });
@@ -2337,9 +2338,9 @@ internal class PmxBuilder
             {
                 Name = (componentsInChildren1[index]).name,
                 Bone = this.sbi((componentsInChildren1[index]).name),
-                Position = new Vector3((float)-((Component)componentsInChildren1[index]).transform.position.x, (float)((Component)componentsInChildren1[index]).transform.position.y, (float)-((Component)componentsInChildren1[index]).transform.position.z) * (float)this.scale,
-                Rotation = new Vector3((float)-((Component)componentsInChildren1[index]).transform.rotation.x, (float)((Component)componentsInChildren1[index]).transform.rotation.y, (float)-((Component)componentsInChildren1[index]).transform.rotation.z),
-                BoxSize = new Vector3((float)((double)componentsInChildren1[index].radius * (double)this.scale / 2.0), (float)((double)componentsInChildren1[index].height * (double)this.scale / 3.0 * 2.0), 0.0f),
+                Position = new PmxLib.Vector3((float)-((Component)componentsInChildren1[index]).transform.position.x, (float)((Component)componentsInChildren1[index]).transform.position.y, (float)-((Component)componentsInChildren1[index]).transform.position.z) * (float)this.scale,
+                Rotation = new PmxLib.Vector3((float)-((Component)componentsInChildren1[index]).transform.rotation.x, (float)((Component)componentsInChildren1[index]).transform.rotation.y, (float)-((Component)componentsInChildren1[index]).transform.rotation.z),
+                BoxSize = new PmxLib.Vector3((float)((double)componentsInChildren1[index].radius * (double)this.scale / 2.0), (float)((double)componentsInChildren1[index].height * (double)this.scale / 3.0 * 2.0), 0.0f),
                 BoxType = PmxBody.BoxKind.Capsule,
                 Mode = PmxBody.ModeType.Static,
                 Group = 13,
@@ -2353,9 +2354,9 @@ internal class PmxBuilder
             {
                 Name = (componentsInChildren2[index]).name,
                 Bone = this.sbi((componentsInChildren2[index]).name),
-                Position = new Vector3((float)-((Component)componentsInChildren2[index]).transform.position.x, (float)((Component)componentsInChildren2[index]).transform.position.y, (float)-((Component)componentsInChildren2[index]).transform.position.z) * (float)this.scale,
-                Rotation = new Vector3((float)-((Component)componentsInChildren2[index]).transform.rotation.x, (float)((Component)componentsInChildren2[index]).transform.rotation.y, (float)-((Component)componentsInChildren2[index]).transform.rotation.z),
-                BoxSize = new Vector3(componentsInChildren2[index].radius, 0.0f, 0.0f) * (float)this.scale / 3f * 2f,
+                Position = new PmxLib.Vector3((float)-((Component)componentsInChildren2[index]).transform.position.x, (float)((Component)componentsInChildren2[index]).transform.position.y, (float)-((Component)componentsInChildren2[index]).transform.position.z) * (float)this.scale,
+                Rotation = new PmxLib.Vector3((float)-((Component)componentsInChildren2[index]).transform.rotation.x, (float)((Component)componentsInChildren2[index]).transform.rotation.y, (float)-((Component)componentsInChildren2[index]).transform.rotation.z),
+                BoxSize = new PmxLib.Vector3(componentsInChildren2[index].radius, 0.0f, 0.0f) * (float)this.scale / 3f * 2f,
                 BoxType = PmxBody.BoxKind.Sphere,
                 Mode = PmxBody.ModeType.Static,
                 Group = 13,
