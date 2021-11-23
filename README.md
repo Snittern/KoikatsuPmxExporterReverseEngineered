@@ -1,4 +1,4 @@
-# KoikatsuPmxExporterReverseEngineered
+# Koikatsu Pmx Exporter (Reverse Engineered & updated)
 
 This is a reconstructed source code for the package PmxExporter version 1.2, whose author I don't know. It has been compiled and tested to work in the latest version of BepInEx.
 
